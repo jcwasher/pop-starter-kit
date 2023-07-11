@@ -16,9 +16,10 @@ class TokenService {
       }),
       headers: {'Content-Type': 'application/json'},
     );
-    if (response.statusCode != 200) return false;
-
     final data = jsonDecode(response.body);
+
+    if (response.statusCode != 200) throw data['message'];
+
     await persistenceService.setString('authToken', data['token']);
     return true;
   }

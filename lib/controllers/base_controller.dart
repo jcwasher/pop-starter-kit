@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
+import 'package:pop_starter_kit/models/controller_state/controller_state.dart';
 
 abstract class BaseController {
-  ValueNotifier<bool> isLoading = ValueNotifier(false);
+  ValueNotifier<ControllerState> state = ValueNotifier(ControllerState.idle());
 
-  Future<T> loadFuture<T>(Future<T> Function() function) async {
-    isLoading.value = true;
+  Future<void> runFuture(AsyncCallback function, {String? message}) async {
     try {
-      T result = await function();
-      return result;
-    } finally {
-      isLoading.value = false;
+      state.value = ControllerState.loading(message);
+      await function();
+      state.value = ControllerState.idle();
+    } catch (error) {
+      state.value = ControllerState.error('$error');
     }
   }
 }

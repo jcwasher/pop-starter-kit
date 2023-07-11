@@ -7,7 +7,7 @@ class AuthGuard extends AutoRouteGuard {
   void onNavigation(NavigationResolver resolver, StackRouter router) async {
     await authController.signInWithToken();
 
-    if (authController.authenticated.value) {
+    if (authController.authenticated) {
       resolver.next();
     } else {
       router.replace(SignInRoute());
