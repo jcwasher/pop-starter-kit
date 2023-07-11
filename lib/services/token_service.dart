@@ -37,4 +37,8 @@ class TokenService {
 
     return response.statusCode == 200;
   }
+
+  Future<void> remove() async {
+    await persistenceService.remove('authToken');
+  }
 }

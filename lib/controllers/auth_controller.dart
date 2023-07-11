@@ -30,4 +30,10 @@ class AuthController extends BaseController {
   Future<void> signInWithToken() async {
     authenticated = await tokenService.validate();
   }
+
+  Future<void> signOut() async {
+    authenticated = false;
+    await tokenService.remove();
+    appRouter.replace(SignInRoute());
+  }
 }
