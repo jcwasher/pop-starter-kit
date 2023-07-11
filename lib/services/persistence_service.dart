@@ -10,4 +10,8 @@ class PersistenceService {
   Future<String?> getString(String key) async {
     return (await _prefs).getString(key);
   }
+
+  Future<void> remove(String key) async {
+    (await _prefs).remove(key);
+  }
 }
