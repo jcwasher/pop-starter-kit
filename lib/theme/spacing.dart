@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class Spacing {
+  static const comfyWidth = 400.0;
+
   static const paddingTiny = 8.0;
   static const paddingSmall = 12.0;
   static const paddingMedium = 16.0;
