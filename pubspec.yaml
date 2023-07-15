@@ -2,7 +2,7 @@ name: pop_starter_kit
 description: An introduction to raw feeding your pet.
 publish_to: 'none'
 
-version: 1.0.0+2
+version: 1.0.0+3
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -20,6 +20,8 @@ dependencies:
   get_it: 7.6.0
   flutter_html: 3.0.0-beta.2
   js: 0.6.7
+  google_fonts: 5.1.0
+  youtube_player_iframe: 4.0.4
 
 dev_dependencies:
   flutter_test:
