@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Version Update",
+      "type": "shell",
+      "command": "bash",
+      "args": ["scripts/update_version.sh"],
+    }
+  ]
+}
