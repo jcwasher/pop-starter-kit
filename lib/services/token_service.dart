@@ -38,6 +38,22 @@ class TokenService {
     return response.statusCode == 200;
   }
 
+  Future<void> refresh() async {
+    final token = await persistenceService.getString('authToken');
+    if (token == null) return null;
+
+    final response = await post(
+      Uri.parse(
+        'https://www.pawsofprey.com/wp-json/jwt-auth/v1/token/refresh',
+      ),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    if (response.statusCode != 200) throw 'Error: Failed to refresh token';
+
+    final data = jsonDecode(response.body);
+    await persistenceService.setString('authToken', data['token']);
+  }
+
   Future<void> remove() async {
     await persistenceService.remove('authToken');
   }

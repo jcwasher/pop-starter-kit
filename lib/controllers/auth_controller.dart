@@ -29,6 +29,7 @@ class AuthController extends BaseController {
 
   Future<void> signInWithToken() async {
     authenticated = await tokenService.validate();
+    if (authenticated) await tokenService.refresh();
   }
 
   Future<void> signOut() async {
