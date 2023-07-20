@@ -82,7 +82,7 @@ class SignInView extends HookWidget {
                         width: double.infinity,
                         child: FilledButton(
                           child: state.maybeWhen(
-                            loading: (_) => Text('Signing in...'),
+                            loading: (message) => Text(message!),
                             orElse: () => Text('Sign in'),
                           ),
                           onPressed: state.maybeWhen(

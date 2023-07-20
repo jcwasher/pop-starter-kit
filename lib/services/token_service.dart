@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:pop_starter_kit/dependencies.dart';
+import 'package:pop_starter_kit/helpers.dart';
 
 class TokenService {
   Future<bool> fetch({
@@ -9,7 +10,7 @@ class TokenService {
     required String password,
   }) async {
     final response = await post(
-      Uri.parse('https://www.pawsofprey.com/wp-json/jwt-auth/v1/token'),
+      Uri.parse('$baseUrl/wp-json/jwt-auth/v1/token'),
       body: jsonEncode({
         'username': username,
         'password': password,
@@ -20,6 +21,7 @@ class TokenService {
 
     if (response.statusCode != 200) throw data['message'];
 
+    await persistenceService.setString('email', username);
     await persistenceService.setString('authToken', data['token']);
     return true;
   }
@@ -29,16 +31,25 @@ class TokenService {
     if (token == null) return false;
 
     final response = await post(
-      Uri.parse(
-        'https://www.pawsofprey.com/wp-json/jwt-auth/v1/token/validate',
-      ),
+      Uri.parse('$baseUrl/wp-json/jwt-auth/v1/token/validate'),
       headers: {'Authorization': 'Bearer $token'},
     );
+    if (response.statusCode != 200) throw 'Error: Token is invalid';
 
-    return response.statusCode == 200;
+    return true;
   }
 
-  Future<void> remove() async {
-    await persistenceService.remove('authToken');
+  Future<void> refresh() async {
+    final token = await persistenceService.getString('authToken');
+    if (token == null) return null;
+
+    final response = await post(
+      Uri.parse('$baseUrl/wp-json/jwt-auth/v1/token/refresh'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    if (response.statusCode != 200) throw 'Error: Failed to refresh token';
+
+    final data = jsonDecode(response.body);
+    await persistenceService.setString('authToken', data['token']);
   }
 }
