@@ -12,3 +12,7 @@ void setUp() {
   GetIt.instance.registerLazySingleton(() => PersistenceService());
   GetIt.instance.registerLazySingleton(() => TokenService());
 }
+
+void reset() {
+  GetIt.instance.resetLazySingleton<AuthController>();
+}

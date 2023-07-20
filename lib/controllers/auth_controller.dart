@@ -2,6 +2,7 @@ import 'package:pop_starter_kit/controllers/base_controller.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/models/controller_state/controller_state.dart';
 import 'package:pop_starter_kit/router/router.gr.dart';
+import 'package:pop_starter_kit/setup.dart';
 
 class AuthController extends BaseController {
   bool authenticated = false;
@@ -23,7 +24,7 @@ class AuthController extends BaseController {
       authenticated = isValidCredentials && isValidOrder;
       if (authenticated) {
         await appRouter.replace(HomeRoute());
-        ControllerState.idle();
+        state.value = ControllerState.idle();
       }
     } catch (error) {
       state.value = ControllerState.error('$error');
@@ -40,6 +41,8 @@ class AuthController extends BaseController {
     authenticated = false;
     await persistenceService.remove('authToken');
     await persistenceService.remove('email');
+
+    reset();
     appRouter.replace(SignInRoute());
   }
 }

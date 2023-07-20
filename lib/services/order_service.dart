@@ -10,7 +10,7 @@ class OrderService {
     final response = await post(
       Uri.parse('$baseUrl/api/starter-kit/validate-order?email=$email'),
     );
-    if (response.statusCode != 200) throw 'Error: No access to product';
+    if (response.statusCode != 200) throw response.body;
 
     return true;
   }
