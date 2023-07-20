@@ -11,16 +11,19 @@ class AuthController extends BaseController {
     required String password,
   }) async {
     try {
-      state.value = ControllerState.loading();
-
-      authenticated = await tokenService.fetch(
+      state.value = ControllerState.loading('Signing in...');
+      final isValidCredentials = await tokenService.fetch(
         username: username,
         password: password,
       );
 
+      state.value = ControllerState.loading('Validating order...');
+      final isValidOrder = await orderService.validate();
+
+      authenticated = isValidCredentials && isValidOrder;
       if (authenticated) {
         await appRouter.replace(HomeRoute());
-        state.value = ControllerState.idle();
+        ControllerState.idle();
       }
     } catch (error) {
       state.value = ControllerState.error('$error');
@@ -28,13 +31,15 @@ class AuthController extends BaseController {
   }
 
   Future<void> signInWithToken() async {
-    authenticated = await tokenService.validate();
+    final isValidToken = await tokenService.validate();
+    authenticated = isValidToken && await orderService.validate();
     if (authenticated) await tokenService.refresh();
   }
 
   Future<void> signOut() async {
     authenticated = false;
-    await tokenService.remove();
+    await persistenceService.remove('authToken');
+    await persistenceService.remove('email');
     appRouter.replace(SignInRoute());
   }
 }
