@@ -14,7 +14,7 @@ class FormCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: Spacing.paddingLarge * 2,
+          horizontal: Spacing.paddingLarge * 1.5,
           vertical: Spacing.paddingLarge,
         ),
         child: Form(

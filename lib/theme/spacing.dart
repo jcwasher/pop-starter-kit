@@ -24,4 +24,6 @@ abstract class Spacing {
   static const verticalSpaceMedium = const SizedBox(height: paddingMedium);
   static const verticalSpaceLarge = const SizedBox(height: paddingLarge);
   static const verticalSpaceXLarge = const SizedBox(height: paddingXLarge);
+
+  static const verticalSpaceFormCardSection = const SizedBox(height: 50);
 }

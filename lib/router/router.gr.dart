@@ -12,7 +12,8 @@ import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
 import 'package:pop_starter_kit/navigators/home_navigator.dart' as _i3;
 import 'package:pop_starter_kit/views/home_view.dart' as _i1;
-import 'package:pop_starter_kit/views/meal_planner/dog/about_page.dart' as _i5;
+import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart'
+    as _i5;
 import 'package:pop_starter_kit/views/meal_planner/meal_planner_view.dart'
     as _i4;
 import 'package:pop_starter_kit/views/sign_in_view.dart' as _i2;

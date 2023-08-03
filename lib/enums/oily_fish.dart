@@ -1,0 +1,1 @@
+enum OilyFish { salmon }

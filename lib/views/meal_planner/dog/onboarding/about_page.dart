@@ -29,62 +29,75 @@ class _DogMealPlannerAboutPageState extends State<DogMealPlannerAboutPage>
     final measurementSystem =
         useValueListenable(mealPlannerController.measurementSystem);
 
-    return FormCard(
+    return Column(
       children: [
-        FormSection(
-          title: 'What\'s your dog\'s name?',
-          child: TextField(
-            controller: nameTextController,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-            ),
-            onChanged: mealPlannerController.setName,
-          ),
+        Flexible(
+          child: Placeholder(),
         ),
-        FormSection(
-          title: 'How much do they weigh?',
-          child: Row(
+        Spacing.verticalSpaceLarge,
+        Flexible(
+          flex: 2,
+          child: FormCard(
             children: [
-              Flexible(
+              FormSection(
+                title: 'What\'s your dog\'s name?',
                 child: TextField(
-                  controller: weightTextController,
+                  controller: nameTextController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                   ),
-                  onChanged: mealPlannerController.setWeight,
+                  onChanged: mealPlannerController.setName,
                 ),
               ),
-              Spacing.horizontalSpaceSmall,
-              ...MeasurementSystem.values.map(
-                (_measurementSystem) => Row(
+              FormSection(
+                title: 'How much do they weigh?',
+                child: Row(
                   children: [
-                    Radio(
-                      groupValue: measurementSystem,
-                      visualDensity: VisualDensity.compact,
-                      value: _measurementSystem,
-                      onChanged: mealPlannerController.setMeasurementSystem,
+                    Flexible(
+                      child: TextField(
+                        controller: weightTextController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                        ),
+                        onChanged: mealPlannerController.setWeight,
+                      ),
                     ),
-                    Spacing.horizontalSpaceXTiny,
-                    Text(_measurementSystem.weightSymbol),
-                    if (_measurementSystem == MeasurementSystem.values.first)
-                      Spacing.horizontalSpaceLarge,
+                    Spacing.horizontalSpaceSmall,
+                    ...MeasurementSystem.values.map(
+                      (_measurementSystem) => Row(
+                        children: [
+                          Radio(
+                            groupValue: measurementSystem,
+                            visualDensity: VisualDensity.compact,
+                            value: _measurementSystem,
+                            onChanged:
+                                mealPlannerController.setMeasurementSystem,
+                          ),
+                          Spacing.horizontalSpaceXTiny,
+                          Text(_measurementSystem.weightSymbol),
+                          if (_measurementSystem ==
+                              MeasurementSystem.values.first)
+                            Spacing.horizontalSpaceLarge,
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
+              FormSection(
+                title: 'Are they a puppy or an adult?',
+                child: PawsOfPreyDropdownButton<DogLifeStage>(
+                  value: lifeStage,
+                  items: DogLifeStage.values
+                      .map((lifeStage) => DropdownMenuItem<DogLifeStage>(
+                            value: lifeStage,
+                            child: Text(lifeStage.name),
+                          ))
+                      .toList(),
+                  onChanged: mealPlannerController.setLifeStage,
+                ),
+              ),
             ],
-          ),
-        ),
-        FormSection(
-          title: 'Are they a puppy or an adult?',
-          child: PawsOfPreyDropdownButton<DogLifeStage>(
-            value: lifeStage,
-            items: DogLifeStage.values
-                .map((lifeStage) => DropdownMenuItem<DogLifeStage>(
-                      value: lifeStage,
-                      child: Text(lifeStage.name),
-                    ))
-                .toList(),
-            onChanged: mealPlannerController.setLifeStage,
           ),
         ),
       ],

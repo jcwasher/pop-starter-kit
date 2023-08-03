@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/enums/dog_activity_level.dart';
 import 'package:pop_starter_kit/enums/dog_life_stage.dart';
+import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/widgets/dropdown_button.dart';
 import 'package:pop_starter_kit/widgets/form_card.dart';
 import 'package:pop_starter_kit/widgets/form_section.dart';
@@ -27,57 +28,69 @@ class _DogMealPlannerHistoryPageState extends State<DogMealPlannerHistoryPage>
     final alreadyRawFed =
         useValueListenable(mealPlannerController.alreadyRawFed);
 
-    return FormCard(
+    return Column(
       children: [
-        if (lifeStage == DogLifeStage.puppy) ...[
-          FormSection(
-            title: 'How old are they?',
-            child: PawsOfPreyDropdownButton<int>(
-              value: monthsOld,
-              items: [
-                for (int i = 1; i <= 12; i++) ...[
-                  DropdownMenuItem<int>(
-                    value: i,
-                    child: Text('$i month${i > 1 ? 's' : ''}'),
+        Flexible(
+          child: Placeholder(),
+        ),
+        Spacing.verticalSpaceLarge,
+        Flexible(
+          flex: 2,
+          child: FormCard(
+            children: [
+              if (lifeStage == DogLifeStage.puppy) ...[
+                FormSection(
+                  title: 'How old are they?',
+                  child: PawsOfPreyDropdownButton<int>(
+                    value: monthsOld,
+                    items: [
+                      for (int i = 1; i <= 12; i++) ...[
+                        DropdownMenuItem<int>(
+                          value: i,
+                          child: Text('$i month${i > 1 ? 's' : ''}'),
+                        ),
+                      ],
+                    ],
+                    onChanged: mealPlannerController.setMonthsOld,
                   ),
-                ],
+                ),
               ],
-              onChanged: mealPlannerController.setMonthsOld,
-            ),
-          ),
-        ],
-        if (lifeStage == DogLifeStage.adult) ...[
-          FormSection(
-            title: 'How active are they?',
-            child: PawsOfPreyDropdownButton<DogActivityLevel>(
-              value: activityLevel,
-              items: DogActivityLevel.values
-                  .map((activityLevel) => DropdownMenuItem<DogActivityLevel>(
-                        value: activityLevel,
-                        child: Text(activityLevel.name),
-                      ))
-                  .toList(),
-              onChanged: mealPlannerController.setActivityLevel,
-            ),
-          ),
-        ],
-        FormSection(
-          title: 'Are they already eating homemade raw food?',
-          child: PawsOfPreyDropdownButton<bool>(
-            value: alreadyRawFed,
-            items: [
-              DropdownMenuItem<bool>(
-                value: true,
-                child: Text('Yes, no transition needed'),
-              ),
-              DropdownMenuItem<bool>(
-                value: false,
-                child: Text(
-                  'No, I need to transition to homemade raw',
+              if (lifeStage == DogLifeStage.adult) ...[
+                FormSection(
+                  title: 'How active are they?',
+                  child: PawsOfPreyDropdownButton<DogActivityLevel>(
+                    value: activityLevel,
+                    items: DogActivityLevel.values
+                        .map((activityLevel) =>
+                            DropdownMenuItem<DogActivityLevel>(
+                              value: activityLevel,
+                              child: Text(activityLevel.name),
+                            ))
+                        .toList(),
+                    onChanged: mealPlannerController.setActivityLevel,
+                  ),
+                ),
+              ],
+              FormSection(
+                title: 'Are they already eating homemade raw food?',
+                child: PawsOfPreyDropdownButton<bool>(
+                  value: alreadyRawFed,
+                  items: [
+                    DropdownMenuItem<bool>(
+                      value: true,
+                      child: Text('Yes, no transition needed'),
+                    ),
+                    DropdownMenuItem<bool>(
+                      value: false,
+                      child: Text(
+                        'No, I need to transition to homemade raw',
+                      ),
+                    ),
+                  ],
+                  onChanged: mealPlannerController.setAlreadyRawFed,
                 ),
               ),
             ],
-            onChanged: mealPlannerController.setAlreadyRawFed,
           ),
         ),
       ],
