@@ -7,13 +7,17 @@ import 'package:pop_starter_kit/enums/gut_soother.dart';
 import 'package:pop_starter_kit/enums/iodine_source.dart';
 import 'package:pop_starter_kit/enums/light_muscle_meat.dart';
 import 'package:pop_starter_kit/enums/liver.dart';
+import 'package:pop_starter_kit/enums/manganese_source.dart';
 import 'package:pop_starter_kit/enums/measurement_system.dart';
 import 'package:pop_starter_kit/enums/meaty_bone.dart';
 import 'package:pop_starter_kit/enums/muscular_organ.dart';
 import 'package:pop_starter_kit/enums/oily_fish.dart';
 import 'package:pop_starter_kit/enums/secreting_organ.dart';
 import 'package:pop_starter_kit/enums/vegetable.dart';
+import 'package:pop_starter_kit/enums/vitamin_b_source.dart';
+import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
+import 'package:pop_starter_kit/enums/zinc_source.dart';
 
 class MealPlannerController extends BaseController {
   ValueNotifier<int> index = ValueNotifier(0);
@@ -39,6 +43,10 @@ class MealPlannerController extends BaseController {
   ValueNotifier<OilyFish?> oilyFish = ValueNotifier(null);
   ValueNotifier<IodineSource?> iodineSource = ValueNotifier(null);
   ValueNotifier<VitaminESource?> vitaminESource = ValueNotifier(null);
+  ValueNotifier<ManganeseSource?> manganeseSource = ValueNotifier(null);
+  ValueNotifier<ZincSource?> zincSource = ValueNotifier(null);
+  ValueNotifier<VitaminBSource?> vitaminBSource = ValueNotifier(null);
+  ValueNotifier<VitaminDSource?> vitaminDSource = ValueNotifier(null);
 
   void setName(String? value) {
     name.value = value;
@@ -112,6 +120,22 @@ class MealPlannerController extends BaseController {
 
   void setVitaminESource(VitaminESource? value) {
     vitaminESource.value = value;
+  }
+
+  void setManganeseSource(ManganeseSource? value) {
+    manganeseSource.value = value;
+  }
+
+  void setZincSource(ZincSource? value) {
+    zincSource.value = value;
+  }
+
+  void setVitaminBSource(VitaminBSource? value) {
+    vitaminBSource.value = value;
+  }
+
+  void setVitaminDSource(VitaminDSource? value) {
+    vitaminDSource.value = value;
   }
 
   void _calculateWeightInGrams() {
