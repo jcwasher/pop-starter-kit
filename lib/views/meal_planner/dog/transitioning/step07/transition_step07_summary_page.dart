@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/transition_summary_base_page.dart';
+import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
 class DogMealPlannerTransitionStep07SummaryPage extends StatelessWidget {
   const DogMealPlannerTransitionStep07SummaryPage({super.key});
@@ -7,10 +9,21 @@ class DogMealPlannerTransitionStep07SummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TransitionSummaryBasePage(
-      currentInstructions:
-          'Oily fish provides omega-3s like EPA and DHA, Salmon, mackerel, sardines, herring, and unseasoned fish roe also provide vitamin D. These next 2+ days you will feed your dog # oz (#g) of the food you chose.',
-      nextStepInstructions:
-          'Once your dog has successfully eaten the foods you chose for at least 2 days and has had firm stool, you can go onto step 8!',
+      children: [
+        TextSpan(
+          text:
+              'Oily fish provides omega-3s like EPA and DHA, Salmon, mackerel, sardines, herring, and unseasoned fish roe also provide vitamin D. These next 2+ days you will feed your dog ',
+        ),
+        RedTextSpan(
+          // we should be able to be more specific here
+          text: '# oz (#g) of the food you chose.',
+        ),
+        Spacing.verticalSpaceTextSpan,
+        TextSpan(
+          text:
+              'Once your dog has successfully eaten the foods you chose for at least 2 days and has had firm stool, you can go onto step 8!',
+        ),
+      ],
     );
   }
 }

@@ -7,13 +7,11 @@ import 'package:pop_starter_kit/widgets/form_section.dart';
 class TransitionSummaryBasePage extends StatelessWidget {
   final String? imageSrc;
   final String? imageCaption;
-  final String currentInstructions;
-  final String nextStepInstructions;
+  final List<InlineSpan> children;
   final bool showPickyEaterMessage;
 
   const TransitionSummaryBasePage({
-    required this.currentInstructions,
-    required this.nextStepInstructions,
+    required this.children,
     this.imageSrc,
     this.imageCaption,
     this.showPickyEaterMessage = true,
@@ -42,19 +40,19 @@ class TransitionSummaryBasePage extends StatelessWidget {
           ),
         FormCard(
           children: [
-            Text(
-              currentInstructions,
-              style: TextStyles.titleMediumBolder(context),
-            ),
-            Spacing.verticalSpaceLarge,
-            Text(
-              nextStepInstructions,
-              style: TextStyles.titleMediumBolder(context),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                style: TextStyles.titleMediumBolder(context),
+                children: children,
+              ),
             ),
             if (showPickyEaterMessage) ...[
               Spacing.verticalSpaceLarge,
               Text(
                 'See your picky eater guide if your dog isn\'t eating something in the meal',
+                textScaleFactor: 0.8,
+                textAlign: TextAlign.center,
               ),
             ],
           ],

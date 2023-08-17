@@ -24,7 +24,7 @@ class DogMealPlannerTransitionStep05IngredientsPage extends HookWidget {
               child: Column(
                 children: [
                   Image.network(
-                    'assets/food/beef_heart.png',
+                    'assets/food/chicken_liver.png',
                     height: 200,
                   ),
                   PawsOfPreyDropdownButton<Liver>(
