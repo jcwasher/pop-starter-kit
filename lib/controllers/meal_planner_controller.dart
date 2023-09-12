@@ -40,7 +40,7 @@ class MealPlannerController extends BaseController {
   ValueNotifier<MuscularOrgan?> muscularOrgan = ValueNotifier(null);
   ValueNotifier<Liver?> liver = ValueNotifier(null);
   ValueNotifier<SecretingOrgan?> secretingOrgan = ValueNotifier(null);
-  ValueNotifier<OilyFish?> oilyFish = ValueNotifier(null);
+  ValueNotifier<Omega3Source?> omega3Source = ValueNotifier(null);
   ValueNotifier<IodineSource?> iodineSource = ValueNotifier(null);
   ValueNotifier<VitaminESource?> vitaminESource = ValueNotifier(null);
   ValueNotifier<ManganeseSource?> manganeseSource = ValueNotifier(null);
@@ -110,8 +110,8 @@ class MealPlannerController extends BaseController {
     secretingOrgan.value = value;
   }
 
-  void setOilyFish(OilyFish? value) {
-    oilyFish.value = value;
+  void setOmega3Source(Omega3Source? value) {
+    omega3Source.value = value;
   }
 
   void setIodineSource(IodineSource? value) {

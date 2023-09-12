@@ -6,6 +6,6 @@ class DogMealPlannerTransitionStep07IngredientsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DogMealPlannerOilyFishIngredientsPage();
+    return DogMealPlannerOmega3SourceIngredientsPage();
   }
 }

@@ -32,7 +32,7 @@ class DogMealPlannerZincSourceIngredientsPage extends HookWidget {
                     items: ZincSource.values
                         .map((zincSource) => DropdownMenuItem<ZincSource>(
                               value: zincSource,
-                              child: Text(zincSource.name),
+                              child: Text(zincSource.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setZincSource,

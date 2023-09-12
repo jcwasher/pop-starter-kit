@@ -34,7 +34,7 @@ class DogMealPlannerTransitionStep06IngredientsPage extends HookWidget {
                         .map((secretingOrgan) =>
                             DropdownMenuItem<SecretingOrgan>(
                               value: secretingOrgan,
-                              child: Text(secretingOrgan.name),
+                              child: Text(secretingOrgan.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setSecretingOrgan,

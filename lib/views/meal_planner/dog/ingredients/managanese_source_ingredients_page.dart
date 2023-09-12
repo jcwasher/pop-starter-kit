@@ -34,7 +34,7 @@ class DogMealPlannerManganeseSourceIngredientsPage extends HookWidget {
                         .map((manganeseSource) =>
                             DropdownMenuItem<ManganeseSource>(
                               value: manganeseSource,
-                              child: Text(manganeseSource.name),
+                              child: Text(manganeseSource.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setManganeseSource,

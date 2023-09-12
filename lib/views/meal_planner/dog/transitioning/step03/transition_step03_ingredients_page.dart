@@ -34,7 +34,7 @@ class DogMealPlannerTransitionStep03IngredientsPage extends HookWidget {
                         .map((additionalMuscleMeat) =>
                             DropdownMenuItem<AdditionalMuscleMeat>(
                               value: additionalMuscleMeat,
-                              child: Text(additionalMuscleMeat.name),
+                              child: Text(additionalMuscleMeat.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setAdditionalMuscleMeat,

@@ -1,5 +1,5 @@
 enum VitaminBSource {
-  nutritionalYeast(description: 'nutritional yeast');
+  nutritionalYeast(description: 'nutritional yeast (flakes or powder)');
 
   final String description;
 

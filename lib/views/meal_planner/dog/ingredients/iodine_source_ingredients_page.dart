@@ -32,7 +32,7 @@ class DogMealPlannerIodineSourceIngredientsPage extends HookWidget {
                     items: IodineSource.values
                         .map((iodineSource) => DropdownMenuItem<IodineSource>(
                               value: iodineSource,
-                              child: Text(iodineSource.name),
+                              child: Text(iodineSource.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setIodineSource,

@@ -31,7 +31,7 @@ class DogMealPlannerVitaminDSourceIngredientsPage extends HookWidget {
                         .map((vitaminDSource) =>
                             DropdownMenuItem<VitaminDSource>(
                               value: vitaminDSource,
-                              child: Text(vitaminDSource.name),
+                              child: Text(vitaminDSource.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setVitaminDSource,

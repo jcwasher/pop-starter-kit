@@ -32,7 +32,7 @@ class DogMealPlannerTransitionStep05IngredientsPage extends HookWidget {
                     items: Liver.values
                         .map((liver) => DropdownMenuItem<Liver>(
                               value: liver,
-                              child: Text(liver.name),
+                              child: Text(liver.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setLiver,

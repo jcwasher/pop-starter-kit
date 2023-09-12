@@ -38,7 +38,7 @@ class DogMealPlannerTransitionStep01IngredientsPage extends HookWidget {
                         .map((lightMuscleMeat) =>
                             DropdownMenuItem<LightMuscleMeat>(
                               value: lightMuscleMeat,
-                              child: Text(lightMuscleMeat.name),
+                              child: Text(lightMuscleMeat.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setLightMuscleMeat,
@@ -63,7 +63,7 @@ class DogMealPlannerTransitionStep01IngredientsPage extends HookWidget {
                     items: Vegetable.values
                         .map((vegetable) => DropdownMenuItem<Vegetable>(
                               value: vegetable,
-                              child: Text(vegetable.name),
+                              child: Text(vegetable.description),
                             ))
                         .toList(),
                     onChanged: mealPlannerController.setVegetable,
