@@ -6,7 +6,6 @@ import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/theme/text_styles.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/managanese_source_ingredients_page.dart';
-import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_b_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_d_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/zinc_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
@@ -30,7 +29,6 @@ import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step08/tran
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step09/transition_step09_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step09/transition_step09_summary_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/summaries/manganese_source_summary_page.dart';
-import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/summaries/vitamin_b_source_summary_page%20copy.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/summaries/vitamin_d_source_summary_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/summaries/zinc_source_summary_page.dart';
 
@@ -109,8 +107,6 @@ class MealPlannerView extends HookWidget {
       DogMealPlannerZincSourceSummaryPage(),
       DogMealPlannerVitaminDSourceIngredientsPage(),
       DogMealPlannerVitaminDSourceSummaryPage(),
-      DogMealPlannerVitaminBSourceIngredientsPage(),
-      DogMealPlannerVitaminBSourceSummaryPage(),
       // ],
     ];
   }

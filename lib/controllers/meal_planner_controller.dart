@@ -14,7 +14,6 @@ import 'package:pop_starter_kit/enums/muscular_organ.dart';
 import 'package:pop_starter_kit/enums/oily_fish.dart';
 import 'package:pop_starter_kit/enums/secreting_organ.dart';
 import 'package:pop_starter_kit/enums/vegetable.dart';
-import 'package:pop_starter_kit/enums/vitamin_b_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
 import 'package:pop_starter_kit/enums/zinc_source.dart';
@@ -45,7 +44,6 @@ class MealPlannerController extends BaseController {
   ValueNotifier<VitaminESource?> vitaminESource = ValueNotifier(null);
   ValueNotifier<ManganeseSource?> manganeseSource = ValueNotifier(null);
   ValueNotifier<ZincSource?> zincSource = ValueNotifier(null);
-  ValueNotifier<VitaminBSource?> vitaminBSource = ValueNotifier(null);
   ValueNotifier<VitaminDSource?> vitaminDSource = ValueNotifier(null);
 
   void setName(String? value) {
@@ -128,10 +126,6 @@ class MealPlannerController extends BaseController {
 
   void setZincSource(ZincSource? value) {
     zincSource.value = value;
-  }
-
-  void setVitaminBSource(VitaminBSource? value) {
-    vitaminBSource.value = value;
   }
 
   void setVitaminDSource(VitaminDSource? value) {

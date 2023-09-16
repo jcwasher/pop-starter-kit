@@ -3,8 +3,8 @@ import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
-class DogMealPlannerVitaminBSourceSummaryPage extends StatelessWidget {
-  const DogMealPlannerVitaminBSourceSummaryPage({super.key});
+class CatMealPlannerVitaminBSourceSummaryPage extends StatelessWidget {
+  const CatMealPlannerVitaminBSourceSummaryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
