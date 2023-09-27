@@ -41,7 +41,7 @@ class MealPlannerView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = usePageController();
-    final index = useListenable(mealPlannerController.index);
+    final currentPage = useListenable(mealPlannerController.currentPage);
     final alreadyRawFed =
         useValueListenable(mealPlannerController.alreadyRawFed);
 
@@ -57,7 +57,10 @@ class MealPlannerView extends HookWidget {
                 flex: 3,
                 child: PageView(
                   controller: pageController,
-                  onPageChanged: (value) => index.value = value,
+                  onPageChanged: (value) {
+                    currentPage.value =
+                        children(alreadyRawFed)[value].runtimeType;
+                  },
                   children: children(alreadyRawFed),
                 ),
               ),
@@ -65,10 +68,18 @@ class MealPlannerView extends HookWidget {
               Flexible(
                 child: _PageViewNavButtons(
                   listenables: mealPlannerController.listenablesForCurrentPage,
-                  onBackPressed: () =>
-                      pageController.jumpToPage(index.value - 1),
+                  onBackPressed: () => pageController.previousPage(
+                    duration: Duration(milliseconds: 200),
+                    curve: Curves.linear,
+                  ),
                   onNextPressed: () =>
-                      pageController.jumpToPage(index.value + 1),
+                      dogMealPlannerOptionalStepDialogController.proceed(
+                    context,
+                    btnOkOnPress: () => pageController.nextPage(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.linear,
+                    ),
+                  ),
                 ),
               ),
             ],

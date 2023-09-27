@@ -17,9 +17,15 @@ import 'package:pop_starter_kit/enums/vegetable.dart';
 import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
 import 'package:pop_starter_kit/enums/zinc_source.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step02/transition_step02_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step04/transition_step04_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step05/transition_step05_ingredients_page.dart';
 
 class MealPlannerController extends BaseController {
-  ValueNotifier<int> index = ValueNotifier(0);
+  ValueNotifier<Type> currentPage = ValueNotifier(DogMealPlannerAboutPage);
 
   ValueNotifier<String?> name = ValueNotifier(null);
   ValueNotifier<double?> weight = ValueNotifier(null);
@@ -143,28 +149,28 @@ class MealPlannerController extends BaseController {
   // ignore: unused_field
   double _weightInGrams = 0.0;
 
-  bool get canGoToPrev => index.value > 0;
+  bool get canGoToPrev => currentPage.value != DogMealPlannerAboutPage;
 
   // currently only handling the transitioning case
   // assume remaining cases are for the transitioning case
-  // TODO: split this up into two different index controllers
+  // TODO: split this up into two different index controllers?
   bool get canGoToNext {
-    switch (index.value) {
-      case 0:
+    switch (currentPage.value) {
+      case DogMealPlannerAboutPage:
         if (name.value == null || name.value!.isEmpty) return false;
         return weight.value != null && lifeStage.value != null;
-      case 1:
+      case DogMealPlannerHistoryPage:
         if (lifeStage.value == null) return false;
         if (alreadyRawFed.value != false) return false;
         if (lifeStage.value!.isPuppy && monthsOld.value != null) return true;
         return lifeStage.value!.isAdult && activityLevel.value != null;
-      case 2:
+      case DogMealPlannerTransitionStep01IngredientsPage:
         return lightMuscleMeat.value != null;
-      case 4:
+      case DogMealPlannerTransitionStep02IngredientsPage:
         return meatyBone.value != null;
-      case 8:
+      case DogMealPlannerTransitionStep04IngredientsPage:
         return muscularOrgan.value != null;
-      case 10:
+      case DogMealPlannerTransitionStep05IngredientsPage:
         return liver.value != null;
       default:
         return true;
@@ -172,18 +178,18 @@ class MealPlannerController extends BaseController {
   }
 
   List<ValueListenable> get listenablesForCurrentPage {
-    switch (index.value) {
-      case 0:
+    switch (currentPage.value) {
+      case DogMealPlannerAboutPage:
         return [name, weight, lifeStage];
-      case 1:
+      case DogMealPlannerHistoryPage:
         return [lifeStage, monthsOld, activityLevel, alreadyRawFed];
-      case 2:
+      case DogMealPlannerTransitionStep01IngredientsPage:
         return [lightMuscleMeat];
-      case 4:
+      case DogMealPlannerTransitionStep02IngredientsPage:
         return [meatyBone];
-      case 8:
+      case DogMealPlannerTransitionStep04IngredientsPage:
         return [muscularOrgan];
-      case 10:
+      case DogMealPlannerTransitionStep05IngredientsPage:
         return [liver];
       default:
         return [];
