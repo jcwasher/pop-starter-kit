@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
+import 'package:pop_starter_kit/mixins/listenable_mixin.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/theme/text_styles.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/managanese_source_ingredients_page.dart';
@@ -41,7 +42,7 @@ class MealPlannerView extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final pageController = usePageController();
-    final currentPage = useListenable(mealPlannerController.currentPage);
+    final currentPage = useListenable(mealPlannerPageController.currentPage);
     final alreadyRawFed =
         useValueListenable(mealPlannerController.alreadyRawFed);
 
@@ -67,7 +68,6 @@ class MealPlannerView extends HookWidget {
               Spacing.verticalSpaceSmall,
               Flexible(
                 child: _PageViewNavButtons(
-                  listenables: mealPlannerController.listenablesForCurrentPage,
                   onBackPressed: () => pageController.previousPage(
                     duration: Duration(milliseconds: 200),
                     curve: Curves.linear,
@@ -123,21 +123,18 @@ class MealPlannerView extends HookWidget {
   }
 }
 
-class _PageViewNavButtons extends HookWidget {
-  final List<ValueListenable> listenables;
+class _PageViewNavButtons extends HookWidget with ListenableMixin {
   final VoidCallback? onBackPressed;
   final VoidCallback? onNextPressed;
 
   const _PageViewNavButtons({
-    required this.listenables,
     this.onBackPressed,
     this.onNextPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    listenables.forEach((listenable) => useListenable(listenable));
-
+    listen();
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -148,7 +145,8 @@ class _PageViewNavButtons extends HookWidget {
               TextStyles.titleMediumBolder(context),
             ),
           ),
-          onPressed: mealPlannerController.canGoToPrev ? onBackPressed : null,
+          onPressed:
+              mealPlannerPageController.canGoToPrev ? onBackPressed : null,
         ),
         TextButton(
           child: Text('NEXT >'),
@@ -157,9 +155,14 @@ class _PageViewNavButtons extends HookWidget {
               TextStyles.titleMediumBolder(context),
             ),
           ),
-          onPressed: mealPlannerController.canGoToNext ? onNextPressed : null,
+          onPressed:
+              mealPlannerPageController.canGoToNext ? onNextPressed : null,
         ),
       ],
     );
   }
+
+  @override
+  List<ValueListenable> get listenables =>
+      mealPlannerPageController.listenablesForCurrentPage;
 }

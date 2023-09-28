@@ -40,7 +40,7 @@ class DogMealPlannerOptionalStepDialogController {
   }
 
   bool get _shouldWarnForCurrentPage {
-    switch (mealPlannerController.currentPage.value) {
+    switch (mealPlannerPageController.currentPage.value) {
       case DogMealPlannerTransitionStep03IngredientsPage:
         return mealPlannerController.additionalMuscleMeat.value == null;
       case DogMealPlannerTransitionStep06IngredientsPage:
@@ -61,7 +61,7 @@ class DogMealPlannerOptionalStepDialogController {
   }
 
   String? get _warningForCurrentPage {
-    switch (mealPlannerController.currentPage.value) {
+    switch (mealPlannerPageController.currentPage.value) {
       case DogMealPlannerTransitionStep03IngredientsPage:
         return 'A raw meal without muscle meat variety may be low in certain minerals.';
       case DogMealPlannerTransitionStep06IngredientsPage:
