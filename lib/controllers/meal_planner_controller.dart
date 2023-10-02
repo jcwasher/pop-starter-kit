@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, unused_field
+
 import 'package:flutter/foundation.dart';
 import 'package:pop_starter_kit/controllers/base_controller.dart';
 import 'package:pop_starter_kit/enums/additional_muscle_meat.dart';
@@ -137,7 +139,46 @@ class MealPlannerController extends BaseController {
     }
   }
 
-  // will be used eventually
-  // ignore: unused_field
   double _weightInGrams = 0.0;
+
+  double _puppyMealToBodyWeightRatioByAge(int monthsOld) {
+    switch (monthsOld) {
+      case 2:
+        return 0.10;
+      case 3:
+        return 0.09;
+      case 4:
+        return 0.08;
+      case 5:
+        return 0.07;
+      case 6:
+        return 0.06;
+      case 7:
+        return 0.05;
+      case 8:
+      case 9:
+      case 10:
+      case 11:
+        return 0.04;
+      case 12:
+        return 0.03;
+      default:
+        return 0; // should never reach this point
+    }
+  }
+
+  double _adultMealToBodyWeightRatioByActivityLevel(
+    DogActivityLevel activityLevel,
+  ) {
+    switch (activityLevel) {
+      case DogActivityLevel.inactive:
+        return 0.015;
+      case DogActivityLevel.light:
+        return 0.02;
+      case DogActivityLevel.moderate:
+        return 0.03;
+      case DogActivityLevel.high:
+        return 0.035;
+    }
+  }
 }
