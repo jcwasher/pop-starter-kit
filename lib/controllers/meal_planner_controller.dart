@@ -11,7 +11,6 @@ import 'package:pop_starter_kit/enums/light_muscle_meat.dart';
 import 'package:pop_starter_kit/enums/liver.dart';
 import 'package:pop_starter_kit/enums/manganese_source.dart';
 import 'package:pop_starter_kit/enums/measurement_system.dart';
-import 'package:pop_starter_kit/enums/meaty_bone.dart';
 import 'package:pop_starter_kit/enums/muscular_organ.dart';
 import 'package:pop_starter_kit/enums/oily_fish.dart';
 import 'package:pop_starter_kit/enums/secreting_organ.dart';
@@ -19,6 +18,7 @@ import 'package:pop_starter_kit/enums/vegetable.dart';
 import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
 import 'package:pop_starter_kit/enums/zinc_source.dart';
+import 'package:pop_starter_kit/models/meaty_bone/meaty_bone.dart';
 
 class MealPlannerController extends BaseController {
   ValueNotifier<String?> name = ValueNotifier(null);

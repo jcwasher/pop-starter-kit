@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pop_starter_kit/dependencies.dart';
-import 'package:pop_starter_kit/enums/meaty_bone.dart';
+import 'package:pop_starter_kit/models/meaty_bone/meaty_bone.dart';
 import 'package:pop_starter_kit/widgets/dropdown_button.dart';
 import 'package:pop_starter_kit/widgets/form_card.dart';
 import 'package:pop_starter_kit/widgets/form_section.dart';

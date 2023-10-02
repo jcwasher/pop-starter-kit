@@ -9,38 +9,45 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:flutter/foundation.dart' as _i8;
 import 'package:flutter/material.dart' as _i7;
-import 'package:pop_starter_kit/navigators/home_navigator.dart' as _i3;
-import 'package:pop_starter_kit/views/home_view.dart' as _i1;
+import 'package:pop_starter_kit/navigators/home_navigator.dart' as _i1;
+import 'package:pop_starter_kit/views/home_view.dart' as _i2;
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart'
-    as _i5;
-import 'package:pop_starter_kit/views/meal_planner/meal_planner_view.dart'
     as _i4;
-import 'package:pop_starter_kit/views/sign_in_view.dart' as _i2;
+import 'package:pop_starter_kit/views/meal_planner/meal_planner_view.dart'
+    as _i5;
+import 'package:pop_starter_kit/views/sign_in_view.dart' as _i3;
 
 abstract class $AppRouter extends _i6.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
   final Map<String, _i6.PageFactory> pagesMap = {
+    HomeNavigator.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i1.HomeNavigator(),
+      );
+    },
     HomeRoute.name: (routeData) {
       final args =
           routeData.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i1.HomeView(key: args.key),
+        child: _i2.HomeView(key: args.key),
       );
     },
     SignInRoute.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.SignInView(),
+        child: const _i3.SignInView(),
       );
     },
-    HomeNavigator.name: (routeData) {
+    DogMealPlannerAboutPage.name: (routeData) {
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.HomeNavigator(),
+        child: const _i4.DogMealPlannerAboutPage(),
       );
     },
     MealPlannerRoute.name: (routeData) {
@@ -50,23 +57,31 @@ abstract class $AppRouter extends _i6.RootStackRouter {
               MealPlannerRouteArgs(type: pathParams.getString('type')));
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i4.MealPlannerView(
+        child: _i5.MealPlannerView(
           type: args.type,
           key: args.key,
         ),
-      );
-    },
-    DogMealPlannerAboutPage.name: (routeData) {
-      return _i6.AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const _i5.DogMealPlannerAboutPage(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.HomeView]
+/// [_i1.HomeNavigator]
+class HomeNavigator extends _i6.PageRouteInfo<void> {
+  const HomeNavigator({List<_i6.PageRouteInfo>? children})
+      : super(
+          HomeNavigator.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeNavigator';
+
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i2.HomeView]
 class HomeRoute extends _i6.PageRouteInfo<HomeRouteArgs> {
   HomeRoute({
     _i7.Key? key,
@@ -95,7 +110,7 @@ class HomeRouteArgs {
 }
 
 /// generated route for
-/// [_i2.SignInView]
+/// [_i3.SignInView]
 class SignInRoute extends _i6.PageRouteInfo<void> {
   const SignInRoute({List<_i6.PageRouteInfo>? children})
       : super(
@@ -109,25 +124,25 @@ class SignInRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i3.HomeNavigator]
-class HomeNavigator extends _i6.PageRouteInfo<void> {
-  const HomeNavigator({List<_i6.PageRouteInfo>? children})
+/// [_i4.DogMealPlannerAboutPage]
+class DogMealPlannerAboutPage extends _i6.PageRouteInfo<void> {
+  const DogMealPlannerAboutPage({List<_i6.PageRouteInfo>? children})
       : super(
-          HomeNavigator.name,
+          DogMealPlannerAboutPage.name,
           initialChildren: children,
         );
 
-  static const String name = 'HomeNavigator';
+  static const String name = 'DogMealPlannerAboutPage';
 
   static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.MealPlannerView]
+/// [_i5.MealPlannerView]
 class MealPlannerRoute extends _i6.PageRouteInfo<MealPlannerRouteArgs> {
   MealPlannerRoute({
     required String type,
-    _i7.Key? key,
+    _i8.Key? key,
     List<_i6.PageRouteInfo>? children,
   }) : super(
           MealPlannerRoute.name,
@@ -153,24 +168,10 @@ class MealPlannerRouteArgs {
 
   final String type;
 
-  final _i7.Key? key;
+  final _i8.Key? key;
 
   @override
   String toString() {
     return 'MealPlannerRouteArgs{type: $type, key: $key}';
   }
-}
-
-/// generated route for
-/// [_i5.DogMealPlannerAboutPage]
-class DogMealPlannerAboutPage extends _i6.PageRouteInfo<void> {
-  const DogMealPlannerAboutPage({List<_i6.PageRouteInfo>? children})
-      : super(
-          DogMealPlannerAboutPage.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'DogMealPlannerAboutPage';
-
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
