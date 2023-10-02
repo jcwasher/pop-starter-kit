@@ -14,4 +14,14 @@ enum Omega3Source {
   final String description;
 
   const Omega3Source({required this.description});
+
+  static List<Omega3Source> get sufficientInVitaminD => [
+        mackerelCanned,
+        mackerelRaw,
+        roe,
+        salmonCanned,
+        salmonRaw,
+        sardines,
+        sardinesCanned,
+      ];
 }

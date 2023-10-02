@@ -22,4 +22,14 @@ enum AdditionalMuscleMeat {
   final String description;
 
   const AdditionalMuscleMeat({required this.description});
+
+  static List<AdditionalMuscleMeat> get reds => [
+        beefChunks,
+        beefFlank,
+        beefGround,
+        beefRound,
+        beefTenderloin,
+        bisonGround,
+        lambGround,
+      ];
 }

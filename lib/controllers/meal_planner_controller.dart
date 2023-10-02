@@ -12,7 +12,7 @@ import 'package:pop_starter_kit/enums/liver.dart';
 import 'package:pop_starter_kit/enums/manganese_source.dart';
 import 'package:pop_starter_kit/enums/measurement_system.dart';
 import 'package:pop_starter_kit/enums/muscular_organ.dart';
-import 'package:pop_starter_kit/enums/oily_fish.dart';
+import 'package:pop_starter_kit/enums/omega3_source.dart';
 import 'package:pop_starter_kit/enums/secreting_organ.dart';
 import 'package:pop_starter_kit/enums/vegetable.dart';
 import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
@@ -45,6 +45,15 @@ class MealPlannerController extends BaseController {
   ValueNotifier<ManganeseSource?> manganeseSource = ValueNotifier(null);
   ValueNotifier<ZincSource?> zincSource = ValueNotifier(null);
   ValueNotifier<VitaminDSource?> vitaminDSource = ValueNotifier(null);
+
+  bool get isMuscularOrganGreenTripe =>
+      muscularOrgan.value == MuscularOrgan.beefGreenTripe;
+
+  bool get isAdditionalMuscleMeatRed =>
+      AdditionalMuscleMeat.reds.contains(additionalMuscleMeat.value);
+
+  bool get isOmega3SourceSufficientInVitaminD =>
+      Omega3Source.sufficientInVitaminD.contains(omega3Source.value);
 
   void setName(String? value) {
     name.value = value;
