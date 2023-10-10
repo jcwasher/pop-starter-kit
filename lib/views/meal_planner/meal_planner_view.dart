@@ -45,6 +45,7 @@ class MealPlannerView extends HookWidget {
     final currentPage = useListenable(mealPlannerPageController.currentPage);
     final alreadyRawFed =
         useValueListenable(mealPlannerController.alreadyRawFed);
+    final pages = children(alreadyRawFed);
 
     return Scaffold(
       body: Center(
@@ -59,10 +60,9 @@ class MealPlannerView extends HookWidget {
                 child: PageView(
                   controller: pageController,
                   onPageChanged: (value) {
-                    currentPage.value =
-                        children(alreadyRawFed)[value].runtimeType;
+                    currentPage.value = pages[value].runtimeType;
                   },
-                  children: children(alreadyRawFed),
+                  children: pages,
                 ),
               ),
               Spacing.verticalSpaceSmall,

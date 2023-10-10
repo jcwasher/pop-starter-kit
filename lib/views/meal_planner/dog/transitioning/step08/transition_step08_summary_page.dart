@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
@@ -8,6 +9,8 @@ class DogMealPlannerTransitionStep08SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iodineSource = mealPlannerController.iodineSource.value;
+
     return TransitionSummaryBasePage(
       children: [
         TextSpan(
@@ -15,8 +18,7 @@ class DogMealPlannerTransitionStep08SummaryPage extends StatelessWidget {
               'Kelp and dulse provides iodine to the diet, which is lacking if you not feeding thyroid glands of an animal. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          // we should be able to be more specific here
-          text: '# oz (#g) of the food you chose.',
+          text: '# oz (#g) of ${iodineSource!.description}',
         ),
         Spacing.verticalSpaceTextSpan,
         TextSpan(

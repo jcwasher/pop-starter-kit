@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
@@ -8,6 +9,8 @@ class DogMealPlannerManganeseSourceSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final manganeseSource = mealPlannerController.manganeseSource.value;
+
     return TransitionSummaryBasePage(
       children: [
         TextSpan(
@@ -15,9 +18,9 @@ class DogMealPlannerManganeseSourceSummaryPage extends StatelessWidget {
               'Manganese is low in raw diets if you\'re not feeding green tripe. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          // we should be able to be more specific here
-          text: '# oz (#g) of the food you chose.',
+          text: '# oz (#g) of ${manganeseSource!.description}',
         ),
+        TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,
         TextSpan(
           text:

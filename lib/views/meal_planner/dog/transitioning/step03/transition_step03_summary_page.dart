@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
@@ -8,6 +9,12 @@ class DogMealPlannerTransitionStep03SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final lightMuscleMeat = mealPlannerController.lightMuscleMeat.value;
+    final vegetable = mealPlannerController.vegetable.value;
+    final meatyBone = mealPlannerController.meatyBone.value;
+    final additionalMuscleMeat =
+        mealPlannerController.additionalMuscleMeat.value;
+
     return TransitionSummaryBasePage(
       imageSrc: '/assets/plates/3dog.png',
       imageCaption: '1/2 raw 1/2 old food',
@@ -16,11 +23,21 @@ class DogMealPlannerTransitionStep03SummaryPage extends StatelessWidget {
           text:
               'Time to add more variety to the diet! I recommend a red meat protein as this will be higher in zinc, iron, and B vitamins. These next 2+ days you will feed your dog ',
         ),
-        RedTextSpan(text: '# oz (#g) of muscle meat'),
-        TextSpan(text: ', '),
-        RedTextSpan(text: '# oz (#g) of vegetables'),
-        TextSpan(text: ', and '),
-        RedTextSpan(text: '# oz (#g) of meaty bone.'),
+        RedTextSpan(text: '# oz (#g) of ${lightMuscleMeat!.description}'),
+        if (additionalMuscleMeat != null) ...[
+          TextSpan(text: ', '),
+          RedTextSpan(
+            text: '# oz (#g) ${additionalMuscleMeat.description}',
+          ),
+          if (vegetable == null) TextSpan(text: ','),
+        ],
+        if (vegetable != null) ...[
+          RedTextSpan(text: '# oz (#g) of ${vegetable.description}'),
+          TextSpan(text: ','),
+        ],
+        TextSpan(text: ' and '),
+        RedTextSpan(text: '# oz (#g) of ${meatyBone!.description}'),
+        TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,
         TextSpan(
           text:
