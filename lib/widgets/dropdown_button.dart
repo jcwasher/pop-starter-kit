@@ -3,14 +3,14 @@ import 'package:pop_starter_kit/theme/spacing.dart';
 
 class PawsOfPreyDropdownButton<T> extends StatelessWidget {
   final T? value;
-  final List<DropdownMenuItem<T>>? items;
+  final List<DropdownMenuItem<T>> items;
   final void Function(T?)? onChanged;
 
   const PawsOfPreyDropdownButton({
-    super.key,
+    required this.items,
     this.value,
-    this.items,
     this.onChanged,
+    super.key,
   });
 
   @override
@@ -26,7 +26,13 @@ class PawsOfPreyDropdownButton<T> extends StatelessWidget {
         isExpanded: true,
         padding: EdgeInsets.symmetric(horizontal: Spacing.paddingSmall),
         value: value,
-        items: items,
+        items: [
+          DropdownMenuItem(
+            value: null,
+            child: SizedBox.shrink(),
+          ),
+          ...items,
+        ],
         onChanged: onChanged,
       ),
     );

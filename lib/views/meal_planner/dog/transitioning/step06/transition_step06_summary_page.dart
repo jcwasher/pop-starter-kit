@@ -16,6 +16,7 @@ class DogMealPlannerTransitionStep06SummaryPage extends StatelessWidget {
     final meatyBone = mealPlannerController.meatyBone.value;
     final additionalMuscleMeat =
         mealPlannerController.additionalMuscleMeat.value;
+    final recipe = mealPlannerController.transitionRecipes[6]!;
 
     return TransitionSummaryBasePage(
       imageSrc: '/assets/plates/6dog.png',
@@ -27,24 +28,39 @@ class DogMealPlannerTransitionStep06SummaryPage extends StatelessWidget {
         ),
         Spacing.verticalSpaceTextSpan,
         TextSpan(text: 'These next 3+ days you will feed your dog '),
-        RedTextSpan(text: '# oz (#g) of ${lightMuscleMeat!.description}'),
+        RedTextSpan(
+          text:
+              '${recipe.lightMuscleMeatWeightString}g of ${lightMuscleMeat!.description}',
+        ),
         if (additionalMuscleMeat != null) ...[
           TextSpan(text: ', '),
           RedTextSpan(
-            text: '# oz (#g) ${additionalMuscleMeat.description}',
+            text:
+                '${recipe.additionalMuscleMeatWeightString}g ${additionalMuscleMeat.description}',
           ),
         ],
         TextSpan(text: ', '),
-        RedTextSpan(text: '# oz (#g) of ${muscularOrgan!.description}'),
+        RedTextSpan(
+          text:
+              '${recipe.muscularOrganWeightString}g of ${muscularOrgan!.description}',
+        ),
         TextSpan(text: ', '),
-        RedTextSpan(text: '# oz (#g) of ${liver!.description}'),
+        RedTextSpan(
+          text: '${recipe.liverWeightString}g of ${liver!.description}',
+        ),
         TextSpan(text: ', '),
         if (secretingOrgan != null) ...[
-          RedTextSpan(text: '# oz (#g) of ${secretingOrgan.description}'),
+          RedTextSpan(
+            text:
+                '${recipe.secretingOrganWeightString}g of ${secretingOrgan.description}',
+          ),
           TextSpan(text: ', '),
         ],
         TextSpan(text: 'and '),
-        RedTextSpan(text: '# oz (#g) of ${meatyBone!.description}.'),
+        RedTextSpan(
+          text:
+              '${recipe.meatyBoneWeightString}g of ${meatyBone!.description}.',
+        ),
         Spacing.verticalSpaceTextSpan,
         TextSpan(
           text:

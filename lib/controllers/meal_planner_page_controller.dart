@@ -4,8 +4,10 @@ import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dar
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step02/transition_step02_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step03/transition_step03_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step04/transition_step04_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step05/transition_step05_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step06/transition_step06_ingredients_page.dart';
 
 class MealPlannerPageController {
   ValueNotifier<Type> currentPage = ValueNotifier(DogMealPlannerAboutPage);
@@ -17,7 +19,7 @@ class MealPlannerPageController {
       case DogMealPlannerAboutPage:
         if (mealPlannerController.name.value == null ||
             mealPlannerController.name.value!.isEmpty) return false;
-        return mealPlannerController.weight.value != null &&
+        return mealPlannerController.petWeight.value != null &&
             mealPlannerController.lifeStage.value != null;
       case DogMealPlannerHistoryPage:
         if (mealPlannerController.lifeStage.value == null) return false;
@@ -44,7 +46,7 @@ class MealPlannerPageController {
       case DogMealPlannerAboutPage:
         return [
           mealPlannerController.name,
-          mealPlannerController.weight,
+          mealPlannerController.petWeight,
           mealPlannerController.lifeStage
         ];
       case DogMealPlannerHistoryPage:
@@ -64,6 +66,25 @@ class MealPlannerPageController {
         return [mealPlannerController.liver];
       default:
         return [];
+    }
+  }
+
+  int? get transitionStepForCurrentPage {
+    switch (currentPage.value) {
+      case DogMealPlannerTransitionStep01IngredientsPage:
+        return 1;
+      case DogMealPlannerTransitionStep02IngredientsPage:
+        return 2;
+      case DogMealPlannerTransitionStep03IngredientsPage:
+        return 3;
+      case DogMealPlannerTransitionStep04IngredientsPage:
+        return 4;
+      case DogMealPlannerTransitionStep05IngredientsPage:
+        return 5;
+      case DogMealPlannerTransitionStep06IngredientsPage:
+        return 6;
+      default:
+        return null;
     }
   }
 }

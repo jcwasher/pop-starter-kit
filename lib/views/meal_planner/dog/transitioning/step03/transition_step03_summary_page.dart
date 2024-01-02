@@ -14,6 +14,7 @@ class DogMealPlannerTransitionStep03SummaryPage extends StatelessWidget {
     final meatyBone = mealPlannerController.meatyBone.value;
     final additionalMuscleMeat =
         mealPlannerController.additionalMuscleMeat.value;
+    final recipe = mealPlannerController.transitionRecipes[3]!;
 
     return TransitionSummaryBasePage(
       imageSrc: '/assets/plates/3dog.png',
@@ -23,20 +24,34 @@ class DogMealPlannerTransitionStep03SummaryPage extends StatelessWidget {
           text:
               'Time to add more variety to the diet! I recommend a red meat protein as this will be higher in zinc, iron, and B vitamins. These next 2+ days you will feed your dog ',
         ),
-        RedTextSpan(text: '# oz (#g) of ${lightMuscleMeat!.description}'),
+        RedTextSpan(
+          text:
+              '${recipe.lightMuscleMeatWeightString}g of ${lightMuscleMeat!.description}',
+        ),
+        if (additionalMuscleMeat == null) ...[
+          TextSpan(text: ','),
+          if (vegetable != null) TextSpan(text: ' '),
+        ],
         if (additionalMuscleMeat != null) ...[
           TextSpan(text: ', '),
           RedTextSpan(
-            text: '# oz (#g) ${additionalMuscleMeat.description}',
+            text:
+                '${recipe.additionalMuscleMeatWeightString}g ${additionalMuscleMeat.description}',
           ),
-          if (vegetable == null) TextSpan(text: ','),
+          TextSpan(text: ','),
+          if (vegetable != null) TextSpan(text: ' '),
         ],
         if (vegetable != null) ...[
-          RedTextSpan(text: '# oz (#g) of ${vegetable.description}'),
+          RedTextSpan(
+            text:
+                '${recipe.vegetableWeightString}g of ${vegetable.description}',
+          ),
           TextSpan(text: ','),
         ],
         TextSpan(text: ' and '),
-        RedTextSpan(text: '# oz (#g) of ${meatyBone!.description}'),
+        RedTextSpan(
+          text: '${recipe.meatyBoneWeightString}g of ${meatyBone!.description}',
+        ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,
         TextSpan(

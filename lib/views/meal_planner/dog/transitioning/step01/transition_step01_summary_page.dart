@@ -11,16 +11,23 @@ class DogMealPlannerTransitionStep01SummaryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final lightMuscleMeat = mealPlannerController.lightMuscleMeat.value;
     final vegetable = mealPlannerController.vegetable.value;
+    final recipe = mealPlannerController.transitionRecipes[1]!;
 
     return TransitionSummaryBasePage(
       imageSrc: '/assets/plates/1dog.png',
       imageCaption: '1/8 raw 7/8 old food',
       children: [
         TextSpan(text: 'For the next 3+ days you will feed your dog '),
-        RedTextSpan(text: '# oz (#g) of ${lightMuscleMeat!.description}'),
+        RedTextSpan(
+          text:
+              '${recipe.lightMuscleMeatWeightString}g of ${lightMuscleMeat!.description}',
+        ),
         if (vegetable != null) ...[
           TextSpan(text: ', and '),
-          RedTextSpan(text: '# oz (#g) of ${vegetable.description}'),
+          RedTextSpan(
+            text:
+                '${recipe.vegetableWeightString}g of ${vegetable.description}',
+          ),
         ],
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

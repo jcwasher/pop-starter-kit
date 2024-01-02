@@ -12,6 +12,7 @@ class DogMealPlannerTransitionStep02SummaryPage extends StatelessWidget {
     final lightMuscleMeat = mealPlannerController.lightMuscleMeat.value;
     final vegetable = mealPlannerController.vegetable.value;
     final meatyBone = mealPlannerController.meatyBone.value;
+    final recipe = mealPlannerController.transitionRecipes[2]!;
 
     return TransitionSummaryBasePage(
       imageSrc: '/assets/plates/2dog.png',
@@ -21,13 +22,21 @@ class DogMealPlannerTransitionStep02SummaryPage extends StatelessWidget {
           text:
               'Now it\'s time for the crunchy meaty bone! These next 2+ days you will feed your dog ',
         ),
-        RedTextSpan(text: '# oz (#g) of ${lightMuscleMeat!.description}'),
+        RedTextSpan(
+          text:
+              '${recipe.lightMuscleMeatWeightString}g of ${lightMuscleMeat!.description}',
+        ),
         if (vegetable != null) ...[
           TextSpan(text: ', '),
-          RedTextSpan(text: '# oz (#g) of ${vegetable.description},'),
+          RedTextSpan(
+            text:
+                '${recipe.vegetableWeightString}g of ${vegetable.description},',
+          ),
         ],
         TextSpan(text: ' and '),
-        RedTextSpan(text: '# oz (#g) of ${meatyBone!.description}'),
+        RedTextSpan(
+          text: '${recipe.meatyBoneWeightString}g of ${meatyBone!.description}',
+        ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,
         TextSpan(

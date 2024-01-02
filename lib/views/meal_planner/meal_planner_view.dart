@@ -44,7 +44,7 @@ class MealPlannerView extends HookWidget {
     final pageController = usePageController();
     final currentPage = useListenable(mealPlannerPageController.currentPage);
     final alreadyRawFed =
-        useValueListenable(mealPlannerController.alreadyRawFed);
+        useValueListenable(mealPlannerController.alreadyRawFed) ?? false;
     final pages = children(alreadyRawFed);
 
     return Scaffold(
@@ -68,18 +68,24 @@ class MealPlannerView extends HookWidget {
               Spacing.verticalSpaceSmall,
               Flexible(
                 child: _PageViewNavButtons(
-                  onBackPressed: () => pageController.previousPage(
-                    duration: Duration(milliseconds: 200),
-                    curve: Curves.linear,
-                  ),
-                  onNextPressed: () =>
-                      dogMealPlannerOptionalStepDialogController.proceed(
-                    context,
-                    btnOkOnPress: () => pageController.nextPage(
+                  onBackPressed: () {
+                    pageController.previousPage(
                       duration: Duration(milliseconds: 200),
                       curve: Curves.linear,
-                    ),
-                  ),
+                    );
+                  },
+                  onNextPressed: () {
+                    dogMealPlannerOptionalStepDialogController.proceed(
+                      context,
+                      btnOkOnPress: () {
+                        mealPlannerController.createTransitionRecipe();
+                        pageController.nextPage(
+                          duration: Duration(milliseconds: 200),
+                          curve: Curves.linear,
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],
@@ -89,11 +95,11 @@ class MealPlannerView extends HookWidget {
     );
   }
 
-  List<Widget> children(bool? alreadyRawFed) {
+  List<Widget> children(bool alreadyRawFed) {
     return [
       DogMealPlannerAboutPage(),
       DogMealPlannerHistoryPage(),
-      if (alreadyRawFed != null && !alreadyRawFed) ...[
+      if (!alreadyRawFed) ...[
         DogMealPlannerTransitionStep01IngredientsPage(),
         DogMealPlannerTransitionStep01SummaryPage(),
         DogMealPlannerTransitionStep02IngredientsPage(),

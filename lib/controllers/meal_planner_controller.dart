@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:pop_starter_kit/controllers/base_controller.dart';
+import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/enums/additional_muscle_meat.dart';
 import 'package:pop_starter_kit/enums/dog_activity_level.dart';
 import 'package:pop_starter_kit/enums/dog_life_stage.dart';
@@ -19,10 +20,11 @@ import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
 import 'package:pop_starter_kit/enums/zinc_source.dart';
 import 'package:pop_starter_kit/models/meaty_bone/meaty_bone.dart';
+import 'package:pop_starter_kit/models/transition_recipe/transition_recipe.dart';
 
 class MealPlannerController extends BaseController {
   ValueNotifier<String?> name = ValueNotifier(null);
-  ValueNotifier<double?> weight = ValueNotifier(null);
+  ValueNotifier<double?> petWeight = ValueNotifier(null);
   ValueNotifier<DogLifeStage?> lifeStage = ValueNotifier(null);
   ValueNotifier<int?> monthsOld = ValueNotifier(null);
   ValueNotifier<DogActivityLevel?> activityLevel = ValueNotifier(null);
@@ -55,13 +57,15 @@ class MealPlannerController extends BaseController {
   bool get isOmega3SourceSufficientInVitaminD =>
       Omega3Source.sufficientInVitaminD.contains(omega3Source.value);
 
+  Map<int, TransitionRecipe> transitionRecipes = {};
+
   void setName(String? value) {
     name.value = value;
   }
 
-  void setWeight(String? weightString) {
-    weight.value = double.parse(weightString!);
-    _calculateWeightInGrams();
+  void setWeight(String? petWeightString) {
+    petWeight.value = double.tryParse(petWeightString!);
+    _calculatePetWeightInGrams();
   }
 
   void setLifeStage(DogLifeStage? value) {
@@ -70,10 +74,12 @@ class MealPlannerController extends BaseController {
 
   void setMonthsOld(int? value) {
     monthsOld.value = value;
+    _calculateMealWeightInGrams();
   }
 
   void setActivityLevel(DogActivityLevel? value) {
     activityLevel.value = value;
+    _calculateMealWeightInGrams();
   }
 
   void setAlreadyRawFed(bool? value) {
@@ -82,7 +88,7 @@ class MealPlannerController extends BaseController {
 
   void setMeasurementSystem(MeasurementSystem? value) {
     measurementSystem.value = value!;
-    _calculateWeightInGrams();
+    _calculatePetWeightInGrams();
   }
 
   void setLightMuscleMeat(LightMuscleMeat? value) {
@@ -141,17 +147,92 @@ class MealPlannerController extends BaseController {
     vitaminDSource.value = value;
   }
 
-  void _calculateWeightInGrams() {
-    if (weight.value != null) {
-      final modifier = measurementSystem.value.isImperial ? 453.592 : 1000;
-      _weightInGrams = (weight.value! * modifier);
+  void createTransitionRecipe() {
+    final step = mealPlannerPageController.transitionStepForCurrentPage;
+    if (step == null) return;
+
+    final rawWeight = _rawWeight(step);
+    final muscleMeatWeight = _muscleMeatRatio(step) * rawWeight;
+    final vegetableWeight = _vegetableRatio(step) * rawWeight;
+
+    switch (step) {
+      case 1:
+        transitionRecipes[1] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatWeight,
+          vegetableWeight: vegetableWeight,
+        );
+        break;
+      case 2:
+        final meatyBoneData = _meatyBoneData(rawWeight);
+
+        transitionRecipes[2] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatWeight - meatyBoneData.meatWeight,
+          vegetableWeight: vegetableWeight,
+          meatyBoneWeight: meatyBoneData.totalWeight,
+        );
+        break;
+      case 3:
+        final meatyBoneData = _meatyBoneData(rawWeight);
+        final muscleMeatData =
+            _muscleMeatData(muscleMeatWeight, meatyBoneData.meatWeight);
+
+        transitionRecipes[3] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatData.lightWeight,
+          vegetableWeight: vegetableWeight,
+          meatyBoneWeight: meatyBoneData.totalWeight,
+          additionalMuscleMeatWeight: muscleMeatData.additionalWeight,
+        );
+        break;
+      case 4:
+        final meatyBoneData = _meatyBoneData(rawWeight);
+        final muscleMeatData =
+            _muscleMeatData(muscleMeatWeight, meatyBoneData.meatWeight);
+
+        transitionRecipes[4] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatData.lightWeight,
+          vegetableWeight: vegetableWeight,
+          meatyBoneWeight: meatyBoneData.totalWeight,
+          additionalMuscleMeatWeight: muscleMeatData.additionalWeight,
+          muscularOrganWeight: 0.15 * rawWeight,
+        );
+        break;
+      case 5:
+        final meatyBoneData = _meatyBoneData(rawWeight);
+        final muscleMeatData =
+            _muscleMeatData(muscleMeatWeight, meatyBoneData.meatWeight);
+
+        transitionRecipes[5] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatData.lightWeight,
+          vegetableWeight: vegetableWeight,
+          meatyBoneWeight: meatyBoneData.totalWeight,
+          additionalMuscleMeatWeight: muscleMeatData.additionalWeight,
+          muscularOrganWeight: 0.20 * rawWeight,
+          liverWeight: 0.03 * rawWeight,
+        );
+        break;
+      case 6:
+        final meatyBoneData = _meatyBoneData(rawWeight);
+        final muscleMeatData =
+            _muscleMeatData(muscleMeatWeight, meatyBoneData.meatWeight);
+
+        transitionRecipes[6] = TransitionRecipe(
+          lightMuscleMeatWeight: muscleMeatData.lightWeight,
+          vegetableWeight: vegetableWeight,
+          meatyBoneWeight: meatyBoneData.totalWeight,
+          additionalMuscleMeatWeight: muscleMeatData.additionalWeight,
+          muscularOrganWeight: 0.25 * rawWeight,
+          liverWeight: 0.03 * rawWeight,
+          secretingOrganWeight: 0.07 * rawWeight,
+        );
+        break;
     }
   }
 
-  double _weightInGrams = 0.0;
+  var _petWeightInGrams = 0.0;
+  var _mealWeightInGrams = 0.0;
 
-  double _puppyMealToBodyWeightRatioByAge(int monthsOld) {
-    switch (monthsOld) {
+  double get _puppyMealToBodyWeightRatio {
+    switch (monthsOld.value) {
       case 2:
         return 0.10;
       case 3:
@@ -172,14 +253,12 @@ class MealPlannerController extends BaseController {
       case 12:
         return 0.03;
       default:
-        return 0; // should never reach this point
+        return 0;
     }
   }
 
-  double _adultMealToBodyWeightRatioByActivityLevel(
-    DogActivityLevel activityLevel,
-  ) {
-    switch (activityLevel) {
+  double get _adultMealToBodyWeightRatio {
+    switch (activityLevel.value) {
       case DogActivityLevel.inactive:
         return 0.015;
       case DogActivityLevel.light:
@@ -188,6 +267,135 @@ class MealPlannerController extends BaseController {
         return 0.03;
       case DogActivityLevel.high:
         return 0.035;
+      default:
+        return 0;
     }
   }
+
+  double _rawWeight(int step) {
+    switch (step) {
+      case 1:
+        return _mealWeightInGrams / 8;
+      case 2:
+        return _mealWeightInGrams / 4;
+      case 3:
+        return _mealWeightInGrams / 2;
+      case 4:
+        return _mealWeightInGrams / 2;
+      case 5:
+        return _mealWeightInGrams * 0.75;
+      case 6:
+        return _mealWeightInGrams;
+      default:
+        return 0;
+    }
+  }
+
+  double _muscleMeatRatio(int step) {
+    final vegetableRatio = _vegetableRatio(step);
+
+    switch (step) {
+      case 1:
+        return 1.0 - vegetableRatio;
+      case 2:
+      case 3:
+        return 0.88 - vegetableRatio;
+      case 4:
+        return 0.78 - vegetableRatio;
+      case 5:
+        return 0.65 - vegetableRatio;
+      case 6:
+        return 0.53 - vegetableRatio;
+      default:
+        return 0;
+    }
+  }
+
+  double _vegetableRatio(int step) {
+    if (vegetable.value == null) return 0;
+
+    switch (step) {
+      case 1:
+        return 0.25;
+      case 2:
+        return 0.10;
+      case 3:
+      case 4:
+      case 5:
+        return 0.05;
+      case 6:
+        return 0.03;
+      default:
+        return 0;
+    }
+  }
+
+  MeatyBoneData _meatyBoneData(double rawWeight) {
+    final boneWeight = 0.12 * rawWeight;
+    final totalWeight = boneWeight / meatyBone.value!.boneRatio;
+    final meatWeight = totalWeight - boneWeight;
+
+    return MeatyBoneData(
+      totalWeight: totalWeight,
+      boneWeight: boneWeight,
+      meatWeight: meatWeight,
+    );
+  }
+
+  MuscleMeatData _muscleMeatData(
+    double muscleMeatWeight,
+    double meatyBoneMeatWeight,
+  ) {
+    final bonelessMuscleMeatWeight = muscleMeatWeight - meatyBoneMeatWeight;
+    var additionalMuscleMeatWeight = 0.0;
+    var lightMuscleMeatWeight = additionalMuscleMeat.value == null
+        ? bonelessMuscleMeatWeight
+        : additionalMuscleMeatWeight = bonelessMuscleMeatWeight / 2;
+
+    return MuscleMeatData(
+      lightWeight: lightMuscleMeatWeight,
+      additionalWeight: additionalMuscleMeatWeight,
+    );
+  }
+
+  void _calculatePetWeightInGrams() {
+    if (petWeight.value != null) {
+      final modifier = measurementSystem.value.isImperial ? 453.592 : 1000;
+      _petWeightInGrams = (petWeight.value! * modifier);
+    }
+
+    if (lifeStage.value != null) {
+      _calculateMealWeightInGrams();
+    }
+  }
+
+  void _calculateMealWeightInGrams() {
+    switch (lifeStage.value!) {
+      case DogLifeStage.puppy:
+        _mealWeightInGrams = _petWeightInGrams * _puppyMealToBodyWeightRatio;
+        break;
+      case DogLifeStage.adult:
+        _mealWeightInGrams = _petWeightInGrams * _adultMealToBodyWeightRatio;
+        break;
+    }
+  }
+}
+
+class MeatyBoneData {
+  final double totalWeight;
+  final double boneWeight;
+  final double meatWeight;
+
+  MeatyBoneData({
+    required this.totalWeight,
+    required this.boneWeight,
+    required this.meatWeight,
+  });
+}
+
+class MuscleMeatData {
+  final double lightWeight;
+  final double additionalWeight;
+
+  MuscleMeatData({required this.lightWeight, required this.additionalWeight});
 }

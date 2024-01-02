@@ -22,7 +22,6 @@ class DogMealPlannerOptionalStepDialogController {
       context: context,
       dialogType: DialogType.warning,
       headerAnimationLoop: false,
-      useRootNavigator: true,
       width: Spacing.comfyWidth,
       desc: _warningForCurrentPage,
       btnCancel: OutlinedButton(
