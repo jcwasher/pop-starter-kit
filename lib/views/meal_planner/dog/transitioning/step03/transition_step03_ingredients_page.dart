@@ -28,11 +28,11 @@ class DogMealPlannerTransitionStep03IngredientsPage extends HookWidget {
                     'assets/food/pork_meat.png',
                     height: 200,
                   ),
-                  PawsOfPreyDropdownButton<AdditionalMuscleMeat>(
+                  PawsOfPreyDropdownButton<MuscleMeat>(
                     value: additionalMuscleMeat,
-                    items: AdditionalMuscleMeat.values
+                    items: MuscleMeat.values
                         .map((additionalMuscleMeat) =>
-                            DropdownMenuItem<AdditionalMuscleMeat>(
+                            DropdownMenuItem<MuscleMeat>(
                               value: additionalMuscleMeat,
                               child: Text(additionalMuscleMeat.description),
                             ))

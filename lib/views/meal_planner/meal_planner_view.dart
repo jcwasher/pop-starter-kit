@@ -9,6 +9,7 @@ import 'package:pop_starter_kit/theme/text_styles.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/managanese_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_d_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/zinc_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscle_meat_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
@@ -99,6 +100,9 @@ class MealPlannerView extends HookWidget {
     return [
       DogMealPlannerAboutPage(),
       DogMealPlannerHistoryPage(),
+      if (alreadyRawFed) ...[
+        DogMealPlannerMuscleMeatIngredientsPage(),
+      ],
       if (!alreadyRawFed) ...[
         DogMealPlannerTransitionStep01IngredientsPage(),
         DogMealPlannerTransitionStep01SummaryPage(),

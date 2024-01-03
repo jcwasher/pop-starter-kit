@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:pop_starter_kit/dependencies.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscle_meat_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
@@ -23,11 +24,12 @@ class MealPlannerPageController {
             mealPlannerController.lifeStage.value != null;
       case DogMealPlannerHistoryPage:
         if (mealPlannerController.lifeStage.value == null) return false;
-        if (mealPlannerController.alreadyRawFed.value != false) return false;
         if (mealPlannerController.lifeStage.value!.isPuppy &&
             mealPlannerController.monthsOld.value != null) return true;
         return mealPlannerController.lifeStage.value!.isAdult &&
             mealPlannerController.activityLevel.value != null;
+      case DogMealPlannerMuscleMeatIngredientsPage:
+        return mealPlannerController.muscleMeats.value?.isNotEmpty ?? false;
       case DogMealPlannerTransitionStep01IngredientsPage:
         return mealPlannerController.lightMuscleMeat.value != null;
       case DogMealPlannerTransitionStep02IngredientsPage:
@@ -56,6 +58,8 @@ class MealPlannerPageController {
           mealPlannerController.activityLevel,
           mealPlannerController.alreadyRawFed,
         ];
+      case DogMealPlannerMuscleMeatIngredientsPage:
+        return [mealPlannerController.muscleMeats];
       case DogMealPlannerTransitionStep01IngredientsPage:
         return [mealPlannerController.lightMuscleMeat];
       case DogMealPlannerTransitionStep02IngredientsPage:
