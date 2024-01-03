@@ -33,7 +33,16 @@ class HomeView extends StatelessWidget {
                 _VideoCard(),
                 _Section(
                   children: MealPlanner.values
-                      .map((g) => _CardButton(title: g.description))
+                      .map(
+                        (g) => _CardButton(
+                          title: g.description,
+                          onTap: () {
+                            if (g == MealPlanner.dogs) {
+                              context.router.pushNamed('meal-planner/dogs');
+                            }
+                          },
+                        ),
+                      )
                       .toList(),
                 ),
                 _Section(
@@ -130,8 +139,9 @@ class _Section extends StatelessWidget {
 
 class _CardButton extends StatelessWidget {
   final String title;
+  final VoidCallback? onTap;
 
-  const _CardButton({required this.title});
+  const _CardButton({required this.title, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +175,7 @@ class _CardButton extends StatelessWidget {
               ),
             ],
           ),
-          onTap: () {},
+          onTap: onTap,
         ),
       ),
     );
