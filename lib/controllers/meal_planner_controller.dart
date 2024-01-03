@@ -49,7 +49,7 @@ class MealPlannerController extends BaseController {
   ValueNotifier<VitaminDSource?> vitaminDSource = ValueNotifier(null);
 
   bool get isMuscularOrganGreenTripe =>
-      muscularOrgan.value == MuscularOrgan.beefGreenTripe;
+      MuscularOrgan.greenTripes.contains(muscularOrgan.value);
 
   bool get isAdditionalMuscleMeatRed =>
       AdditionalMuscleMeat.reds.contains(additionalMuscleMeat.value);

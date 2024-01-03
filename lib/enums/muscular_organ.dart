@@ -24,4 +24,10 @@ enum MuscularOrgan {
   final String description;
 
   const MuscularOrgan({required this.description});
+
+  static List<MuscularOrgan> get greenTripes => [
+        MuscularOrgan.beefGreenTripe,
+        MuscularOrgan.bisonGreenTripe,
+        MuscularOrgan.lambGreenTripe,
+      ];
 }

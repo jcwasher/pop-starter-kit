@@ -105,7 +105,8 @@ class MealPlannerView extends HookWidget {
         DogMealPlannerTransitionStep02IngredientsPage(),
         DogMealPlannerTransitionStep02SummaryPage(),
         DogMealPlannerTransitionStep03IngredientsPage(),
-        DogMealPlannerTransitionStep03SummaryPage(),
+        if (mealPlannerController.additionalMuscleMeat.value != null)
+          DogMealPlannerTransitionStep03SummaryPage(),
         DogMealPlannerTransitionStep04IngredientsPage(),
         DogMealPlannerTransitionStep04SummaryPage(),
         DogMealPlannerTransitionStep05IngredientsPage(),
@@ -113,22 +114,28 @@ class MealPlannerView extends HookWidget {
         DogMealPlannerTransitionStep06IngredientsPage(),
         DogMealPlannerTransitionStep06SummaryPage(),
         DogMealPlannerTransitionStep07IngredientsPage(),
-        DogMealPlannerTransitionStep07SummaryPage(),
+        if (mealPlannerController.omega3Source.value != null)
+          DogMealPlannerTransitionStep07SummaryPage(),
         DogMealPlannerTransitionStep08IngredientsPage(),
-        DogMealPlannerTransitionStep08SummaryPage(),
+        if (mealPlannerController.iodineSource.value != null)
+          DogMealPlannerTransitionStep08SummaryPage(),
         DogMealPlannerTransitionStep09IngredientsPage(),
-        DogMealPlannerTransitionStep09SummaryPage(),
+        if (mealPlannerController.vitaminESource.value != null)
+          DogMealPlannerTransitionStep09SummaryPage(),
         if (!mealPlannerController.isMuscularOrganGreenTripe) ...[
           DogMealPlannerManganeseSourceIngredientsPage(),
-          DogMealPlannerManganeseSourceSummaryPage(),
+          if (mealPlannerController.manganeseSource.value != null)
+            DogMealPlannerManganeseSourceSummaryPage(),
         ],
         if (!mealPlannerController.isAdditionalMuscleMeatRed) ...[
           DogMealPlannerZincSourceIngredientsPage(),
-          DogMealPlannerZincSourceSummaryPage(),
+          if (mealPlannerController.zincSource.value != null)
+            DogMealPlannerZincSourceSummaryPage(),
         ],
         if (!mealPlannerController.isOmega3SourceSufficientInVitaminD) ...[
           DogMealPlannerVitaminDSourceIngredientsPage(),
-          DogMealPlannerVitaminDSourceSummaryPage(),
+          if (mealPlannerController.vitaminDSource.value != null)
+            DogMealPlannerVitaminDSourceSummaryPage(),
         ],
       ],
     ];
