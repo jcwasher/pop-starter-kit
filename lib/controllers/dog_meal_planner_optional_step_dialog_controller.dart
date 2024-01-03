@@ -3,8 +3,13 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/iodine_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/omega3_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_d_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_e_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/zinc_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscular_organ_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_secreting_organ_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step03/transition_step03_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step06/transition_step06_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step07/transition_step07_ingredients_page.dart';
@@ -45,15 +50,22 @@ class DogMealPlannerOptionalStepDialogController {
       case DogMealPlannerTransitionStep06IngredientsPage:
         return mealPlannerController.secretingOrgan.value == null;
       case DogMealPlannerTransitionStep07IngredientsPage:
+      case DogMealPlannerOmega3SourceIngredientsPage:
         return mealPlannerController.omega3Source.value == null;
       case DogMealPlannerTransitionStep08IngredientsPage:
+      case DogMealPlannerIodineSourceIngredientsPage:
         return mealPlannerController.iodineSource.value == null;
       case DogMealPlannerTransitionStep09IngredientsPage:
+      case DogMealPlannerVitaminESourceIngredientsPage:
         return mealPlannerController.vitaminESource.value == null;
       case DogMealPlannerZincSourceIngredientsPage:
         return mealPlannerController.zincSource.value == null;
       case DogMealPlannerVitaminDSourceIngredientsPage:
         return mealPlannerController.vitaminDSource.value == null;
+      case DogMealPlannerMuscularOrganIngredientsPage:
+        return mealPlannerController.muscularOrgans.value == null;
+      case DogMealPlannerSecretingOrganIngredientsPage:
+        return mealPlannerController.secretingOrgans.value == null;
       default:
         return false;
     }
@@ -64,17 +76,23 @@ class DogMealPlannerOptionalStepDialogController {
       case DogMealPlannerTransitionStep03IngredientsPage:
         return 'A raw meal without muscle meat variety may be low in certain minerals.';
       case DogMealPlannerTransitionStep06IngredientsPage:
+      case DogMealPlannerSecretingOrganIngredientsPage:
         return 'A raw meal without secreting organs may be too low in B vitamins, iron, and zinc.';
       case DogMealPlannerTransitionStep07IngredientsPage:
+      case DogMealPlannerOmega3SourceIngredientsPage:
         return 'A raw meal without oily fish may be too low in omega-3\'s and vitamin D.';
       case DogMealPlannerTransitionStep08IngredientsPage:
+      case DogMealPlannerIodineSourceIngredientsPage:
         return 'Your raw meal will be low in iodine.';
       case DogMealPlannerTransitionStep09IngredientsPage:
+      case DogMealPlannerVitaminESourceIngredientsPage:
         return 'Your raw meal will be low in vitamin E.';
       case DogMealPlannerZincSourceIngredientsPage:
         return 'Your raw meal will be low in zinc.';
       case DogMealPlannerVitaminDSourceIngredientsPage:
         return 'Your raw meal will be low in vitamin D';
+      case DogMealPlannerMuscularOrganIngredientsPage:
+        return 'A raw meal without muscular organs may be too low in B vitamins, iron, and zinc.';
       default:
         return null;
     }

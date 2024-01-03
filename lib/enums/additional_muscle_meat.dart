@@ -1,4 +1,4 @@
-enum AdditionalMuscleMeat {
+enum MuscleMeat {
   beefChunks(description: 'lean beef chunks'),
   beefFlank(description: 'lean beef flank'),
   beefGround(description: '90/10 ground beef'),
@@ -21,9 +21,9 @@ enum AdditionalMuscleMeat {
 
   final String description;
 
-  const AdditionalMuscleMeat({required this.description});
+  const MuscleMeat({required this.description});
 
-  static List<AdditionalMuscleMeat> get reds => [
+  static List<MuscleMeat> get reds => [
         beefChunks,
         beefFlank,
         beefGround,

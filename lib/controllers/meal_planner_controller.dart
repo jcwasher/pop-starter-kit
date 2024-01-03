@@ -32,15 +32,22 @@ class MealPlannerController extends BaseController {
   ValueNotifier<MeasurementSystem> measurementSystem =
       ValueNotifier(MeasurementSystem.imperial);
 
+  // non-transitioning
+  ValueNotifier<List<MuscleMeat>?> muscleMeats = ValueNotifier(null);
+  ValueNotifier<List<MuscularOrgan>?> muscularOrgans = ValueNotifier(null);
+  ValueNotifier<List<SecretingOrgan>?> secretingOrgans = ValueNotifier(null);
+
+  // transitioning
   ValueNotifier<LightMuscleMeat?> lightMuscleMeat = ValueNotifier(null);
   ValueNotifier<Vegetable?> vegetable = ValueNotifier(null);
   ValueNotifier<GutSoother?> gutSoother = ValueNotifier(null);
   ValueNotifier<MeatyBone?> meatyBone = ValueNotifier(null);
-  ValueNotifier<AdditionalMuscleMeat?> additionalMuscleMeat =
-      ValueNotifier(null);
+  ValueNotifier<MuscleMeat?> additionalMuscleMeat = ValueNotifier(null);
   ValueNotifier<MuscularOrgan?> muscularOrgan = ValueNotifier(null);
-  ValueNotifier<Liver?> liver = ValueNotifier(null);
   ValueNotifier<SecretingOrgan?> secretingOrgan = ValueNotifier(null);
+
+  // shared
+  ValueNotifier<Liver?> liver = ValueNotifier(null);
   ValueNotifier<Omega3Source?> omega3Source = ValueNotifier(null);
   ValueNotifier<IodineSource?> iodineSource = ValueNotifier(null);
   ValueNotifier<VitaminESource?> vitaminESource = ValueNotifier(null);
@@ -52,7 +59,7 @@ class MealPlannerController extends BaseController {
       MuscularOrgan.greenTripes.contains(muscularOrgan.value);
 
   bool get isAdditionalMuscleMeatRed =>
-      AdditionalMuscleMeat.reds.contains(additionalMuscleMeat.value);
+      MuscleMeat.reds.contains(additionalMuscleMeat.value);
 
   bool get isOmega3SourceSufficientInVitaminD =>
       Omega3Source.sufficientInVitaminD.contains(omega3Source.value);
@@ -107,7 +114,7 @@ class MealPlannerController extends BaseController {
     meatyBone.value = value;
   }
 
-  void setAdditionalMuscleMeat(AdditionalMuscleMeat? value) {
+  void setAdditionalMuscleMeat(MuscleMeat? value) {
     additionalMuscleMeat.value = value;
   }
 

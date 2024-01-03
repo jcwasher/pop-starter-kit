@@ -1,5 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:pop_starter_kit/dependencies.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_liver_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_meaty_bone_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscle_meat_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
@@ -23,7 +26,6 @@ class MealPlannerPageController {
             mealPlannerController.lifeStage.value != null;
       case DogMealPlannerHistoryPage:
         if (mealPlannerController.lifeStage.value == null) return false;
-        if (mealPlannerController.alreadyRawFed.value != false) return false;
         if (mealPlannerController.lifeStage.value!.isPuppy &&
             mealPlannerController.monthsOld.value != null) return true;
         return mealPlannerController.lifeStage.value!.isAdult &&
@@ -31,11 +33,15 @@ class MealPlannerPageController {
       case DogMealPlannerTransitionStep01IngredientsPage:
         return mealPlannerController.lightMuscleMeat.value != null;
       case DogMealPlannerTransitionStep02IngredientsPage:
+      case DogMealPlannerMeatyBoneIngredientsPage:
         return mealPlannerController.meatyBone.value != null;
       case DogMealPlannerTransitionStep04IngredientsPage:
         return mealPlannerController.muscularOrgan.value != null;
       case DogMealPlannerTransitionStep05IngredientsPage:
+      case DogMealPlannerLiverIngredientsPage:
         return mealPlannerController.liver.value != null;
+      case DogMealPlannerMuscleMeatIngredientsPage:
+        return mealPlannerController.muscleMeats.value?.isNotEmpty ?? false;
       default:
         return true;
     }
@@ -59,11 +65,15 @@ class MealPlannerPageController {
       case DogMealPlannerTransitionStep01IngredientsPage:
         return [mealPlannerController.lightMuscleMeat];
       case DogMealPlannerTransitionStep02IngredientsPage:
+      case DogMealPlannerMeatyBoneIngredientsPage:
         return [mealPlannerController.meatyBone];
       case DogMealPlannerTransitionStep04IngredientsPage:
         return [mealPlannerController.muscularOrgan];
       case DogMealPlannerTransitionStep05IngredientsPage:
+      case DogMealPlannerLiverIngredientsPage:
         return [mealPlannerController.liver];
+      case DogMealPlannerMuscleMeatIngredientsPage:
+        return [mealPlannerController.muscleMeats];
       default:
         return [];
     }

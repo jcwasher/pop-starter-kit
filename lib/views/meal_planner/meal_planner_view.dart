@@ -6,9 +6,17 @@ import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/mixins/listenable_mixin.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
 import 'package:pop_starter_kit/theme/text_styles.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/iodine_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/managanese_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/omega3_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_d_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/vitamin_e_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/ingredients/zinc_source_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_liver_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_meaty_bone_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscle_meat_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_muscular_organ_ingredients_page.dart';
+import 'package:pop_starter_kit/views/meal_planner/dog/non-transitioning/dog_meal_planner_secreting_organ_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/about_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/onboarding/history_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/dog/transitioning/step01/transition_step01_ingredients_page.dart';
@@ -58,6 +66,7 @@ class MealPlannerView extends HookWidget {
               Flexible(
                 flex: 3,
                 child: PageView(
+                  physics: kIsWeb ? NeverScrollableScrollPhysics() : null,
                   controller: pageController,
                   onPageChanged: (value) {
                     currentPage.value = pages[value].runtimeType;
@@ -99,6 +108,22 @@ class MealPlannerView extends HookWidget {
     return [
       DogMealPlannerAboutPage(),
       DogMealPlannerHistoryPage(),
+      if (alreadyRawFed) ...[
+        DogMealPlannerMuscleMeatIngredientsPage(),
+        DogMealPlannerMeatyBoneIngredientsPage(),
+        DogMealPlannerMuscularOrganIngredientsPage(),
+        DogMealPlannerLiverIngredientsPage(),
+        DogMealPlannerSecretingOrganIngredientsPage(),
+        DogMealPlannerOmega3SourceIngredientsPage(),
+        DogMealPlannerIodineSourceIngredientsPage(),
+        DogMealPlannerVitaminESourceIngredientsPage(),
+        if (!mealPlannerController.isMuscularOrganGreenTripe)
+          DogMealPlannerManganeseSourceIngredientsPage(),
+        if (!mealPlannerController.isAdditionalMuscleMeatRed)
+          DogMealPlannerZincSourceIngredientsPage(),
+        if (!mealPlannerController.isOmega3SourceSufficientInVitaminD)
+          DogMealPlannerVitaminDSourceIngredientsPage(),
+      ],
       if (!alreadyRawFed) ...[
         DogMealPlannerTransitionStep01IngredientsPage(),
         DogMealPlannerTransitionStep01SummaryPage(),
