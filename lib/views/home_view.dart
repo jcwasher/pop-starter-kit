@@ -32,18 +32,14 @@ class HomeView extends StatelessWidget {
               children: [
                 _VideoCard(),
                 _Section(
-                  children: MealPlanner.values
-                      .map(
-                        (g) => _CardButton(
-                          title: g.description,
-                          onTap: () {
-                            if (g == MealPlanner.dogs) {
-                              context.router.pushNamed('meal-planner/dogs');
-                            }
-                          },
-                        ),
-                      )
-                      .toList(),
+                  children: MealPlanner.values.map((p) {
+                    return _CardButton(
+                      title: p.description,
+                      onTap: () {
+                        context.router.pushNamed('meal-planner/${p.name}');
+                      },
+                    );
+                  }).toList(),
                 ),
                 _Section(
                   title: 'Video Guides',

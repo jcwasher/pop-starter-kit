@@ -16,8 +16,34 @@ class AppRouter extends $AppRouter {
               initial: true,
             ),
             AutoRoute(
-              page: MealPlannerRoute.page,
-              path: 'meal-planner/:type',
+              page: DogMealPlannerRoute.page,
+              path: 'meal-planner/dogs',
+              children: [
+                AutoRoute(
+                  page: DogOnboardingRoute.page,
+                  path: 'onboarding',
+                  initial: true,
+                ),
+                AutoRoute(
+                  page: DogTransitioningRoute.page,
+                  path: 'transitioning',
+                ),
+                AutoRoute(
+                  page: DogNonTransitioningRoute.page,
+                  path: 'non-transitioning',
+                ),
+              ],
+            ),
+            AutoRoute(
+              page: CatMealPlannerRoute.page,
+              path: 'meal-planner/cats',
+              children: [
+                AutoRoute(
+                  page: CatOnboardingRoute.page,
+                  path: 'onboarding',
+                  initial: true,
+                ),
+              ],
             ),
           ],
         ),
