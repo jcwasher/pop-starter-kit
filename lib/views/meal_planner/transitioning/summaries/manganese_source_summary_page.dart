@@ -18,7 +18,8 @@ class MealPlannerManganeseSourceSummaryPage extends StatelessWidget {
               'Manganese is low in raw diets if you\'re not feeding green tripe. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# oz (#g) of ${manganeseSource!.description}',
+          text:
+              '${mealPlannerController.manganeseSourceAmount.toStringAsFixed(1)}g of ${manganeseSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

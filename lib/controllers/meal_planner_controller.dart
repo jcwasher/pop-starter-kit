@@ -20,6 +20,7 @@ import 'package:pop_starter_kit/enums/vitamin_d_source.dart';
 import 'package:pop_starter_kit/enums/vitamin_e_source.dart';
 import 'package:pop_starter_kit/enums/zinc_source.dart';
 import 'package:pop_starter_kit/models/meaty_bone/meaty_bone.dart';
+import 'package:pop_starter_kit/models/recipe/recipe_item.dart';
 import 'package:pop_starter_kit/models/transition_recipe/transition_recipe.dart';
 
 class MealPlannerController extends BaseController {
@@ -65,6 +66,8 @@ class MealPlannerController extends BaseController {
       Omega3Source.sufficientInVitaminD.contains(omega3Source.value);
 
   Map<int, TransitionRecipe> transitionRecipes = {};
+
+  List<RecipeItem> recipeItems = [];
 
   void setName(String? value) {
     name.value = value;
@@ -386,6 +389,86 @@ class MealPlannerController extends BaseController {
         break;
     }
   }
+
+  void buildRecipeFromTransition() {
+    final lastTransitionRecipe = transitionRecipes[6]!;
+
+    recipeItems = [
+      if (lastTransitionRecipe.lightMuscleMeatWeight != null)
+        RecipeItem<LightMuscleMeat>(
+          food: lightMuscleMeat.value!,
+          amount: lastTransitionRecipe.lightMuscleMeatWeight!,
+        ),
+      if (lastTransitionRecipe.vegetableWeight != null)
+        RecipeItem<Vegetable>(
+          food: vegetable.value!,
+          amount: lastTransitionRecipe.vegetableWeight!,
+        ),
+      if (lastTransitionRecipe.meatyBoneWeight != null)
+        RecipeItem<MeatyBone>(
+          food: meatyBone.value!,
+          amount: lastTransitionRecipe.meatyBoneWeight!,
+        ),
+      if (lastTransitionRecipe.additionalMuscleMeatWeight != null)
+        RecipeItem<MuscleMeat>(
+          food: additionalMuscleMeat.value!,
+          amount: lastTransitionRecipe.additionalMuscleMeatWeight!,
+        ),
+      if (lastTransitionRecipe.muscularOrganWeight != null)
+        RecipeItem<MuscularOrgan>(
+          food: muscularOrgan.value!,
+          amount: lastTransitionRecipe.muscularOrganWeight!,
+        ),
+      if (lastTransitionRecipe.liverWeight != null)
+        RecipeItem<Liver>(
+          food: liver.value!,
+          amount: lastTransitionRecipe.liverWeight!,
+        ),
+      if (lastTransitionRecipe.secretingOrganWeight != null)
+        RecipeItem<SecretingOrgan>(
+          food: secretingOrgan.value!,
+          amount: lastTransitionRecipe.secretingOrganWeight!,
+        ),
+      if (omega3Source.value != null)
+        RecipeItem<Omega3Source>(
+          food: omega3Source.value!,
+          amount: omega3SourceAmount,
+        ),
+      if (iodineSource.value != null)
+        RecipeItem<IodineSource>(
+          food: iodineSource.value!,
+          amount: iodineSourceAmount,
+        ),
+      if (vitaminESource.value != null)
+        RecipeItem<VitaminESource>(
+          food: vitaminESource.value!,
+          amount: vitaminESourceAmount,
+        ),
+      if (manganeseSource.value != null)
+        RecipeItem<ManganeseSource>(
+          food: manganeseSource.value!,
+          amount: manganeseSourceAmount,
+        ),
+      if (zincSource.value != null)
+        RecipeItem<ZincSource>(
+          food: zincSource.value!,
+          amount: zincSourceAmount,
+        ),
+      if (vitaminDSource.value != null)
+        RecipeItem<VitaminDSource>(
+          food: vitaminDSource.value!,
+          amount: vitaminDSourceAmount,
+        ),
+    ];
+  }
+
+  double get omega3SourceAmount => 0.003 * petWeight.value!;
+  double get iodineSourceAmount => iodineSource.value?.mass.si ?? 0.0;
+  double get vitaminESourceAmount => 1.0;
+  double get manganeseSourceAmount => 0.002 * petWeight.value!;
+  double get zincSourceAmount => 0.001 * petWeight.value!;
+  double get vitaminDSourceAmount =>
+      vitaminDSource.value?.amount(petWeight.value!) ?? 0.0;
 }
 
 class MeatyBoneData {

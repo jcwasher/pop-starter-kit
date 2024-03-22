@@ -18,7 +18,8 @@ class MealPlannerTransitionStep07SummaryPage extends StatelessWidget {
               'Oily fish provides omega-3s like EPA and DHA, Salmon, mackerel, sardines, herring, and unseasoned fish roe also provide vitamin D. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# oz (#g) of ${omega3Source!.description}',
+          text:
+              '${mealPlannerController.omega3SourceAmount.toStringAsFixed(1)}g of ${omega3Source!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

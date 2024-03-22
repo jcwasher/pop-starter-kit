@@ -18,7 +18,8 @@ class MealPlannerZincSourceSummaryPage extends StatelessWidget {
               'Zinc is low in raw diets if you\'re only feeding poultry or rabbit. If you\'re feeding grass fed and finished beef, then zinc will most likely be met. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# oz (#g) of ${zincSource!.description}',
+          text:
+              '${mealPlannerController.zincSourceAmount.toStringAsFixed(1)}g of ${zincSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

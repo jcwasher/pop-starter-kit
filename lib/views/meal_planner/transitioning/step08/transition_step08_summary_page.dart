@@ -18,7 +18,8 @@ class MealPlannerTransitionStep08SummaryPage extends StatelessWidget {
               'Kelp and dulse provides iodine to the diet, which is lacking if you not feeding thyroid glands of an animal. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# oz (#g) of ${iodineSource!.description}',
+          text:
+              '${mealPlannerController.iodineSourceAmount.toStringAsFixed(1)}g ${iodineSource!.description}',
         ),
         Spacing.verticalSpaceTextSpan,
         TextSpan(

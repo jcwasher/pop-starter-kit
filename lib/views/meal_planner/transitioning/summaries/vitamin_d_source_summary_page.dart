@@ -18,7 +18,8 @@ class MealPlannerVitaminDSourceSummaryPage extends StatelessWidget {
               'Vitamin D is low in raw diets that don\'t include salmon, mackerel, sardines, fish eggs, or cod liver oil. If you\'re feeding pasture raised pork with fat, vitamin D will likely be met. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# oz (#g) of ${vitaminDSource!.description}',
+          text:
+              '${mealPlannerController.vitaminDSourceAmount.toStringAsFixed(1)}g of ${vitaminDSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

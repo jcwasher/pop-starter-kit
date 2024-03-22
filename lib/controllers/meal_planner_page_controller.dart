@@ -18,6 +18,7 @@ class MealPlannerPageController {
   bool get canGoToPrev => appRouter.stack.isNotEmpty;
 
   bool get canGoToNext {
+    print(currentPage.value);
     switch (currentPage.value) {
       case MealPlannerAboutPage:
         if (mealPlannerController.name.value == null ||

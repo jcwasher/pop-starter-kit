@@ -1,6 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/change_notifier.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:pop_starter_kit/dependencies.dart';
+import 'package:pop_starter_kit/mixins/listenable_mixin.dart';
 import 'package:pop_starter_kit/views/meal_planner/ingredients/managanese_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/ingredients/vitamin_d_source_ingredients_page.dart';
 import 'package:pop_starter_kit/views/meal_planner/ingredients/zinc_source_ingredients_page.dart';
@@ -28,12 +31,18 @@ import 'package:pop_starter_kit/views/meal_planner/transitioning/summaries/vitam
 import 'package:pop_starter_kit/views/meal_planner/transitioning/summaries/zinc_source_summary_page.dart';
 
 @RoutePage()
-class DogTransitioningView extends StatelessWidget {
+class DogTransitioningView extends HookWidget with ListenableMixin {
   const DogTransitioningView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    listen();
+
     return MealPlannerPageView(
+      onEnd: () {
+        mealPlannerController.buildRecipeFromTransition();
+        context.router.pushNamed('recipe');
+      },
       children: [
         MealPlannerTransitionStep01IngredientsPage(),
         MealPlannerTransitionStep01SummaryPage(),
@@ -75,4 +84,16 @@ class DogTransitioningView extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  List<ValueListenable> get listenables => [
+        mealPlannerController.additionalMuscleMeat,
+        mealPlannerController.omega3Source,
+        mealPlannerController.iodineSource,
+        mealPlannerController.vitaminESource,
+        mealPlannerController.muscularOrgan,
+        mealPlannerController.manganeseSource,
+        mealPlannerController.zincSource,
+        mealPlannerController.vitaminDSource,
+      ];
 }

@@ -18,7 +18,8 @@ class MealPlannerTransitionStep09SummaryPage extends StatelessWidget {
               'Vitamin E is low in raw diets unless whole prey animals are fed. Nuts and seeds are high in vitamin E, but they are also high in fat and calories. Naturally derived vitamin E oil is a simple way of adding it in. These next 2+ days you will feed your dog ',
         ),
         RedTextSpan(
-          text: '# ${vitaminESource!.medium} ${vitaminESource.description}',
+          text:
+              '${mealPlannerController.vitaminESourceAmount.toStringAsFixed(1)} ${vitaminESource!.units} ${vitaminESource.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

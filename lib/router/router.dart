@@ -32,6 +32,10 @@ class AppRouter extends $AppRouter {
                   page: DogNonTransitioningRoute.page,
                   path: 'non-transitioning',
                 ),
+                AutoRoute(
+                  page: RecipeRoute.page,
+                  path: 'recipe',
+                ),
               ],
             ),
             AutoRoute(
