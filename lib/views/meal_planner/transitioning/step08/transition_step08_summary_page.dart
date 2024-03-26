@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/transitioning/final_transition_recipe.dart';
 import 'package:pop_starter_kit/views/meal_planner/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
@@ -17,9 +18,10 @@ class MealPlannerTransitionStep08SummaryPage extends StatelessWidget {
           text:
               'Kelp and dulse provides iodine to the diet, which is lacking if you not feeding thyroid glands of an animal. These next 2+ days you will feed your dog ',
         ),
+        ...FinalTransitionRecipe.items(hasAdditional: true),
         RedTextSpan(
           text:
-              '${mealPlannerController.iodineSourceAmount.toStringAsFixed(1)}g ${iodineSource!.description}',
+              '${mealPlannerController.iodineSourceAmount.toStringAsFixed(3)}g ${iodineSource!.description}',
         ),
         Spacing.verticalSpaceTextSpan,
         TextSpan(

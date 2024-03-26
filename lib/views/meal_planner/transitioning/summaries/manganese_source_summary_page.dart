@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/transitioning/final_transition_recipe.dart';
 import 'package:pop_starter_kit/views/meal_planner/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
@@ -17,9 +18,10 @@ class MealPlannerManganeseSourceSummaryPage extends StatelessWidget {
           text:
               'Manganese is low in raw diets if you\'re not feeding green tripe. These next 2+ days you will feed your dog ',
         ),
+        ...FinalTransitionRecipe.items(hasAdditional: true),
         RedTextSpan(
           text:
-              '${mealPlannerController.manganeseSourceAmount.toStringAsFixed(1)}g of ${manganeseSource!.description}',
+              '${mealPlannerController.manganeseSourceAmount.toStringAsFixed(3)}g of ${manganeseSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

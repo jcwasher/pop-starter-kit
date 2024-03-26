@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/transitioning/final_transition_recipe.dart';
 import 'package:pop_starter_kit/views/meal_planner/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
@@ -17,9 +18,10 @@ class MealPlannerTransitionStep07SummaryPage extends StatelessWidget {
           text:
               'Oily fish provides omega-3s like EPA and DHA, Salmon, mackerel, sardines, herring, and unseasoned fish roe also provide vitamin D. These next 2+ days you will feed your dog ',
         ),
+        ...FinalTransitionRecipe.items(hasAdditional: true),
         RedTextSpan(
           text:
-              '${mealPlannerController.omega3SourceAmount.toStringAsFixed(1)}g of ${omega3Source!.description}',
+              '${mealPlannerController.omega3SourceAmount.toStringAsFixed(3)}g of ${omega3Source!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

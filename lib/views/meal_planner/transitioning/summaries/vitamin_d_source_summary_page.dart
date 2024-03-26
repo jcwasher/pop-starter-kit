@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/transitioning/final_transition_recipe.dart';
 import 'package:pop_starter_kit/views/meal_planner/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
@@ -17,9 +18,10 @@ class MealPlannerVitaminDSourceSummaryPage extends StatelessWidget {
           text:
               'Vitamin D is low in raw diets that don\'t include salmon, mackerel, sardines, fish eggs, or cod liver oil. If you\'re feeding pasture raised pork with fat, vitamin D will likely be met. These next 2+ days you will feed your dog ',
         ),
+        ...FinalTransitionRecipe.items(hasAdditional: true),
         RedTextSpan(
           text:
-              '${mealPlannerController.vitaminDSourceAmount.toStringAsFixed(1)}g of ${vitaminDSource!.description}',
+              '${mealPlannerController.vitaminDSourceAmount.toStringAsFixed(3)}g of ${vitaminDSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,

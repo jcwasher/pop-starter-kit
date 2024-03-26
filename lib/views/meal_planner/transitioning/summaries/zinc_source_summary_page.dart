@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pop_starter_kit/dependencies.dart';
 import 'package:pop_starter_kit/theme/spacing.dart';
+import 'package:pop_starter_kit/views/meal_planner/transitioning/final_transition_recipe.dart';
 import 'package:pop_starter_kit/views/meal_planner/transitioning/transition_summary_base_page.dart';
 import 'package:pop_starter_kit/widgets/red_text_span.dart';
 
@@ -17,9 +18,10 @@ class MealPlannerZincSourceSummaryPage extends StatelessWidget {
           text:
               'Zinc is low in raw diets if you\'re only feeding poultry or rabbit. If you\'re feeding grass fed and finished beef, then zinc will most likely be met. These next 2+ days you will feed your dog ',
         ),
+        ...FinalTransitionRecipe.items(hasAdditional: true),
         RedTextSpan(
           text:
-              '${mealPlannerController.zincSourceAmount.toStringAsFixed(1)}g of ${zincSource!.description}',
+              '${mealPlannerController.zincSourceAmount.toStringAsFixed(3)}g of ${zincSource!.description}',
         ),
         TextSpan(text: '.'),
         Spacing.verticalSpaceTextSpan,
